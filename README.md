@@ -10,26 +10,25 @@ But we would like to take a closer look at the drug war in Mexico. Over 47000 pe
 In our research we would like to find optimal strategies for the government to reduce the civil violence as much as possible.
 
 ## The Model
- 
-Map
+### Map
 * Population density
 * Prosperity
 
-Initial Parameters
+### Initial Parameters
 * Number of Mafia followers
 * Number of Police officers
 
-Agent Police officer
+### Agent Police officer
 * Traitor? (true/false)
 * Willingness to assume risks
 * Influence on his environment
 
-Agent: Mafia agent
+### Agent: Mafia agent
 * Traitor? (true/false)
 * Willingness to assume risks
 * Influence on his environment
 
-Agent: General Population
+### Agent: General Population
 * General satisfaction/hardship
 * Support for the Mafia
 * Support for the Police
