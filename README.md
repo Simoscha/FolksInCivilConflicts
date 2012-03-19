@@ -36,15 +36,15 @@ In our research we would like to find optimal strategies for the government to r
 * Influence on his environment
  
 ## Fundamental Questions
-(Main question)
-How will the situation in the city, given by its initial parameters, evolve over time?  
-(Secondary)
-How should the general population act to improve or at least conserve the status of their daily life? 
-How aggressively can the police act against suspects without suppressing the general population and therefore increasing their hardship?
-How should the police act in general to help the population? 
-(Optional)
-How should the police balance short term suffering against long term benefit?
-How can the Mafia best interfere with successful police work and therefore augment or at least conserve their power over the general population?
+### Main question
+* How will the situation in the city, given by its initial parameters, evolve over time?  
+### Secondary
+* How should the general population act to improve or at least conserve the status of their daily life? 
+* How aggressively can the police act against suspects without suppressing the general population and therefore increasing their hardship?
+* How should the police act in general to help the population? 
+### Optional
+* How should the police balance short term suffering against long term benefit?
+* How can the Mafia best interfere with successful police work and therefore augment or at least conserve their power over the general population?
 
 ## Expected Results
 1.	We expect us to find a system of differential equations which will show us an equilibrium of a stable ratio between police and Mafia agents. It seems possible to us that one of these two groups might get extinguished by one another, based on the parameters we initialize our map with. 
@@ -56,4 +56,6 @@ How can the Mafia best interfere with successful police work and therefore augme
 * Civil_Violence_Epstein2002.pdf
 
 ## Research Methods
-We’re planning to use Agent-Based Models to simulate different scenarios.
+We’re planning to use Agent-Based Models to simulate different scenarios. 
+To kick it off we start simulating on synthetically created datasets. 
+If possible, we will try to add original datasets.
