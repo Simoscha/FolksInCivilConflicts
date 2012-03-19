@@ -36,12 +36,15 @@ In our research we would like to find optimal strategies for the government to r
 * Influence on his environment
  
 ## Fundamental Questions
+
 ### Main question
 * How will the situation in the city, given by its initial parameters, evolve over time?  
+
 ### Secondary
 * How should the general population act to improve or at least conserve the status of their daily life? 
 * How aggressively can the police act against suspects without suppressing the general population and therefore increasing their hardship?
 * How should the police act in general to help the population? 
+
 ### Optional
 * How should the police balance short term suffering against long term benefit?
 * How can the Mafia best interfere with successful police work and therefore augment or at least conserve their power over the general population?
