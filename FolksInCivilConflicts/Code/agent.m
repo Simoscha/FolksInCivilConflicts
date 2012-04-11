@@ -27,16 +27,25 @@ classdef agent < handle
     
     end
     
+         
+    
     methods
-        % Constructor: function name ist Klassenname, obj ist das Rueckgabeelement (obj.numer greift auf die eigene Membervariable zu)
-
-        function obj=agent(num, w, c, i,bS)
+        % initializes the agent-object: has basically the role of a
+        % constructor, but doesn't have problems with matrices.
+        function obj=initAgent(obj,num)
             obj.number=num;
-            obj.wealth=w;
-            obj.courage=c;
-            obj.influence=i;
-            obj.basicSupport=bS;
+            if(num==0)
+                return
+            end
+            obj.wealth=randomvalue(1);
+            obj.satisfaction=obj.wealth; %wealth ist ja der anfangswert von satisfaction
+            obj.courage=randomvalue(1);
+            obj.influence=randomvalue(1);
+            obj.basicSupport=randomvalue(1);
+            obj.support=obj.basicSupport;   %basic support ist ja der anfangswert von support
         end
+        
+        
         
         % the first input of the functions has to be the agent
         % itself: when using the function you can just wright
@@ -46,7 +55,14 @@ classdef agent < handle
         % We still need to define its range
         function obj=newSat(obj)   
             
-            obj.satisfaction=obj.wealth-(obj.place.jailtime*obj.place.pArrest+obj.place.injury*obj.place.pInjury);
+            obj.satisfaction=obj.satisfaction-(obj.place.jailtime*(obj.place.pArrest-obj.place.pAbefore)+obj.place.injury*(obj.place.pInjury-obj.place.pIbefore));
+            
+            if(obj.satisfaction>1)
+                obj.satisfaction=1;
+            end
+            if(obj.satisfaction<0)
+                obj.satisfaction=0;
+            end
             
         end
 
@@ -57,12 +73,25 @@ classdef agent < handle
             obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);
             obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
             
+            if(obj.riskP>1)
+                obj.riskP=1;
+            end
+            if(obj.riskP<0)
+                obj.riskP=0;
+            end
+            if(obj.riskM>1)
+                obj.riskM=1;
+            end
+            if(obj.riskM<0)
+                obj.riskM=0;
+            end            
+            
         end
         
         % Changes the total Support
         function obj=newSup(obj)
             
-            obj.support=obj.basicSupport - obj.riskP + obj.riskM;
+            obj.support=obj.support - obj.riskP + obj.riskM;
             
             %If the support would be leave the defined area: just set it to
             %the boundary-value

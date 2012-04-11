@@ -25,19 +25,21 @@ classdef location < handle
        % The influences have to be defined from the outside as they depend
        % from oder location-objects
        pArrest          %probability that an Agent is arrested standig here
+       pAbefore=0       %probability of Arrest one iteration step before (at the beginning =0)
        pInjury          %probability that an Agent is injured standig here
+       pIbefore=0       %probability of Injury one iteration step before (at the beginning =0)
        
     end
     
     methods
         %Constructor: initializes the constant properties
-        function obj=location(x,y,jailtime,injury,vision,person)
+        %if the field is empty: person.number=-1;
+        function obj=initLocation(x,y,jailtime,injury,vision)
             obj.x=x;
             obj.y=y;
             obj.jailtime=jailtime;
             obj.injury=injury;
-            obj.vision=vision;
-            obj.person=person;           
+            obj.vision=vision;          
         end
         
         %defines the probilites to be arrested and/or injured

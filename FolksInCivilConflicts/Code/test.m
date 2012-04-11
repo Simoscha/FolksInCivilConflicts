@@ -1,5 +1,8 @@
-p=agent(1,5,3,4,0.2);
-loc=location(1,1,5,5,1,p);
+p=agent;
+p.initAgent(1);
+loc=location;
+loc.initLocation(1,1,5,5,1);
+loc.person=p;
 p.place=loc;
 loc.pArrest=0.2;
 loc.pInjury=0.6;
