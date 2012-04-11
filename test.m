@@ -1,0 +1,13 @@
+p=agent(1,5,3,4,0.2);
+loc=location(1,1,5,5,1,p);
+p.place=loc;
+loc.pArrest=0.2;
+loc.pInjury=0.6;
+p.newSat;
+p.satisfaction
+p.satisfaction=3.3;
+p.newRisk;
+p.riskM
+p.riskP
+p.newSup;
+p.support
