@@ -34,7 +34,7 @@ classdef location < handle
     methods
         %Constructor: initializes the constant properties
         %if the field is empty: person.number=-1;
-        function obj=initLocation(x,y,jailtime,injury,vision)
+        function obj=initLocation(obj,x,y,jailtime,injury,vision)
             obj.x=x;
             obj.y=y;
             obj.jailtime=jailtime;
