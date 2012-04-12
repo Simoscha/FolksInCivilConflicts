@@ -1,4 +1,4 @@
-function [ person,world ] = movePerson( person,world )
+function [ person,world ] = movePerson( person,world,hospital,prison )
 %MOVEPERSON Summary of this function goes here
 %   Detailed explanation goes here
     [neighbours,counter]=getNeighbours(person, world,0); %gets the empty, neighbouring fields and there number

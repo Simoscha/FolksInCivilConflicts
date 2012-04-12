@@ -1,14 +1,17 @@
 close all
 clear all
 
-global prison
-global hospital
 
 world = createWorld(30,30,150);
+[agent,before]=findAgents(world);
+before
 
-for index = 1:20;
+    prison=location;
+    hospital=location;
+
+for index = 1:5;
     displayWorld(world);
-    moveAll(world);
+    moveAll(world,hospital,prison);
 end
 
 [agents,amount] = findAgents(world);
