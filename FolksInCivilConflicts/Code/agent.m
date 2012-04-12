@@ -63,7 +63,6 @@ classdef agent < handle
             if(obj.satisfaction<0)
                 obj.satisfaction=0;
             end
-            
         end
 
         % Changes the two risk-values.

@@ -32,7 +32,7 @@ classdef agent < handle
     methods
         % initializes the agent-object: has basically the role of a
         % constructor, but doesn't have problems with matrices.
-        function obj=initAgent(obj,num)
+        function [obj,change]=initAgent(obj,num)
             obj.number=num;
             if(num==0)
                 return
@@ -57,6 +57,12 @@ classdef agent < handle
             
             obj.satisfaction=obj.satisfaction-(obj.place.jailtime*(obj.place.pArrest-obj.place.pAbefore)+obj.place.injury*(obj.place.pInjury-obj.place.pIbefore));
             
+            if(obj.satisfaction>1)
+                obj.satisfaction=1;
+            end
+            if(obj.satisfaction<0)
+                obj.satisfaction=0;
+            end
         end
 
         % Changes the two risk-values.
@@ -65,6 +71,19 @@ classdef agent < handle
                       
             obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);
             obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
+            
+            if(obj.riskP>1)
+                obj.riskP=1;
+            end
+            if(obj.riskP<0)
+                obj.riskP=0;
+            end
+            if(obj.riskM>1)
+                obj.riskM=1;
+            end
+            if(obj.riskM<0)
+                obj.riskM=0;
+            end            
             
         end
         
