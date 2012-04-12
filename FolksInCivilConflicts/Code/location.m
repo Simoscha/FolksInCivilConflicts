@@ -48,7 +48,15 @@ classdef location < handle
             obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infTot));
         end
         
-
+        function prison(obj,k)
+            obj.x=-1;
+            obj.y=k;        %Position in the prison array
+        end
+        function hospital(obj,k)
+            obj.x=-2;
+            obj.y=k;    %Position in the hospital array
+        end
+        
     end
 end
 

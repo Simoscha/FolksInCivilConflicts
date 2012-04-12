@@ -29,7 +29,8 @@ function [ person,world ] = movePerson( person,world )
         if(comp<(world(y,x).pArrest))    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
             arrested=world(y,x).person;
             world(y,x).person=empty; 
-            arrested.place=0;
+            arrested.place.prison(length(prison)+1); %location of arrested is set to prison
+            prison(length(prison)+1)=arrested;      %the agent is added to the prison array
         end
     end
     
@@ -47,7 +48,8 @@ function [ person,world ] = movePerson( person,world )
         if(comp<world(y,x).pInjury)    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
             injured=world(y,x).person;
             world(y,x).person=empty;
-            injured.place=0;
+            injured.place.hospital(length(prison)+1);   %location of injured is set to hospital
+            hospital(length(hospital)+1)=injured;       %%the agent is added to the hospital array
         end
     end
     
