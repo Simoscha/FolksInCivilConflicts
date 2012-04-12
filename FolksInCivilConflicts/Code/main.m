@@ -7,7 +7,11 @@ world = createWorld(30,30,150);
 before
 
     prison=location;
+    prison.x=-2;
+    prison.y=5;
     hospital=location;
+    hospital.x=-1;
+    hospital.y=3;
 
 for index = 1:5;
     displayWorld(world);

@@ -48,6 +48,25 @@ classdef location < handle
             obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infTot));
         end
         
+        %defines the new influences of Mafia, Police and Total
+        function newInfluences(obj,world)
+            % the new influences don't depend on the old ones so first set
+            % them all to zero
+            obj.infMafia=0;     
+            obj.infPolice=0;
+            obj.infTot=0;
+            obj.person.place=obj;   %to be safe: if the agent isn't properly defined
+            [neighbours,amount]=getNeighbours(obj.person,world,1);
+            for k=1:amount
+                obj.infTot=obj.infTot+neighbours(k).person.influence;
+                if(neighbours(k).person.support>0.75)
+                    obj.infPolice=obj.infPolice+neighbours(k).person.influence;
+                end
+                if(neighbours(k).person.support<0.25)
+                    obj.infMafia=obj.infMafia+neighbours(k).person.influence;
+                end
+            end
+        end
               
     end
 end

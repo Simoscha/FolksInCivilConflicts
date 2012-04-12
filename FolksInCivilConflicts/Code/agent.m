@@ -9,7 +9,8 @@ classdef agent < handle
     %  
     %AGENT Summary of this class goes here
     %   Detailed explanation goes here
-    % Beschreibt einen Agent
+    % Beschreibt einen Agent     
+    
     properties
     
         number      % Falls man etwas auswerten will, bei dem man die Agents identifizieren muss und bsp. number=0 heisst, kein Agent (für Feld)
@@ -104,9 +105,33 @@ classdef agent < handle
             
         end
         
-        % Yet to be implemented: a function for movement, arrest and injury
+        %moves an agent using movePerson
+        function move(obj,world,hospital,prison)
+            movePerson( obj,world,hospital,prison )
+        end
         
-          
+        
+        %sends agent to prison
+        function toPrison(obj)      
+           buffer=location;
+           buffer.x=-2;
+           buffer.y=length(prison)+1;
+           empty=agent;
+           empty.number=0;
+           obj.place.person=empty;
+           obj.place=buffer; 
+        end
+        
+        %sends agent to the hospital
+        function toHospital(obj)
+           buffer=location;
+           buffer.x=-1;
+           buffer.y=length(hospital)+1;
+           empty=agent;
+           empty.number=0;
+           obj.place.person=empty;
+           obj.place=buffer; 
+        end
       
     end
     
