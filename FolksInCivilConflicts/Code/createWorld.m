@@ -1,6 +1,6 @@
 function world = createWorld(height,width,peopleAmount)
 
-    vision = 1;
+    vision = 2;
     %world = zeros(height,width);
     
     %fill with people

@@ -1,0 +1,18 @@
+close all
+clear all
+
+global prison
+global hospital
+
+world = createWorld(30,30,2);
+
+displayWorld(world);
+
+moveAll(world);
+
+displayWorld(world);
+moveAll(world);
+dis
+
+[agents,amount] = findAgents(world);
+amount
