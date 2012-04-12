@@ -2,13 +2,14 @@ function display = displayWorld(world)
     height = length(world(:,1));
     width = length(world(1,:));
     
+    figure
     %plot satisfaction
     subplot(2,1,1);
     
     for index = 0:height*width-1
        y = floor(index/width)+1;
        x = mod(index,width)+1;
-       if(0 == world(y,x).person)
+       if(0 == world(y,x).person.number)
          plot(y,x,'.g');  
          hold on
        else
@@ -30,7 +31,7 @@ function display = displayWorld(world)
     for index = 0:height*width-1
        y = floor(index/width)+1;
        x = mod(index,width)+1;
-       if(0 == world(y,x).person)
+       if(0 == world(y,x).person.number)
          plot(y,x,'.g');  
          hold on
        else

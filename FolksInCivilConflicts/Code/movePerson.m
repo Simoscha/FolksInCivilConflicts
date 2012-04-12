@@ -26,7 +26,7 @@ function [ person,world ] = movePerson( person,world )
         x=neighbours(index).x;  %the field to check
         y=neighbours(index).y;
         comp=rand;                  %random number between 0 and 1
-        if(comp<(world(y,x).pArrest)    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
+        if(comp<(world(y,x).pArrest))    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
             arrested=world(y,x).person;
             world(y,x).person=empty; 
             arrested.place=0;
