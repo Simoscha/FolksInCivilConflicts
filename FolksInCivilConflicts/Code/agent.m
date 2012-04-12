@@ -104,12 +104,7 @@ classdef agent < handle
             
             
         end
-        
-        %moves an agent using movePerson
-        function move(obj,world,hospital,prison)
-            movePerson( obj,world,hospital,prison )
-        end
-        
+               
         %sends agent to prison
         function toPrison(obj,prison)      
            buffer=location;
@@ -136,11 +131,15 @@ classdef agent < handle
            hospital(length(hospital)+1)=buffer;
         end
         
-        %gets the neighbours using getNeighbours
+        %gets the neighbours using getNeighbours (unnecessary but nice)
         function [neighbours,counter] = neighbours(person,world,chooser)
            [neighbours,counter] = getNeighbours(person,world,chooser); 
         end
         
+        %moves an agent using movePerson (unnecessary but nice)
+        function move(obj,world,hospital,prison)
+            movePerson( obj,world,hospital,prison )
+        end
               
     end
     
