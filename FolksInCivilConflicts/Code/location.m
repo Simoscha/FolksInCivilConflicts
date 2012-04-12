@@ -72,8 +72,8 @@ classdef location < handle
         
         %gets the neighbouring Fields, using getNeighbours on the agent on
         %the field
-        function [neighbours,counter] = neighbours(person,world,chooser)
-            [neighbours,counter] = getNeighbours(person,world,chooser);
+        function [neighbours,counter] = neighbours(loc,world,chooser)
+            [neighbours,counter] = getNeighbours(loc.person,world,chooser);
         end
                 
     end
