@@ -110,7 +110,6 @@ classdef agent < handle
             movePerson( obj,world,hospital,prison )
         end
         
-        
         %sends agent to prison
         function toPrison(obj)      
            buffer=location;

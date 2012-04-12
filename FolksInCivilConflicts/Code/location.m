@@ -24,10 +24,10 @@ classdef location < handle
        infTot           %Sum of the influences of all agents within vision
        % The influences have to be defined from the outside as they depend
        % from oder location-objects
-       pArrest          %probability that an Agent is arrested standig here
-       pAbefore=0       %probability of Arrest one iteration step before (at the beginning =0)
-       pInjury          %probability that an Agent is injured standig here
-       pIbefore=0       %probability of Injury one iteration step before (at the beginning =0)
+       pArrest=0        %probability that an Agent is arrested standig here (at the beginning =0 so that in the first change the pAbefore is set to 0)
+       pAbefore       %probability of Arrest one iteration step before 
+       pInjury=0        %probability that an Agent is injured standig here
+       pIbefore       %probability of Injury one iteration step before (at the beginning =0 so that in the first change the pIbefore is set to 0)
        
     end
     
@@ -44,6 +44,8 @@ classdef location < handle
         
         %defines the probilites to be arrested and/or injured
         function probabilities(obj)
+            obj.pAbefore=obj.pArrest;   
+            obj.pIbefore=obj.pInjury;   
             obj.pArrest=(1-obj.person.support)*(1-exp(-obj.infPolice/obj.infMafia));
             obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infTot));
         end
