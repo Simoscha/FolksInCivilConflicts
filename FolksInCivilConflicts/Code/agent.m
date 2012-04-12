@@ -111,25 +111,29 @@ classdef agent < handle
         end
         
         %sends agent to prison
-        function toPrison(obj)      
+        function toPrison(obj,prison)      
            buffer=location;
            buffer.x=-2;
            buffer.y=length(prison)+1;
+           buffer.person=obj;
            empty=agent;
            empty.number=0;
            obj.place.person=empty;
            obj.place=buffer; 
+           prison(length(prison)+1)=buffer;
         end
         
         %sends agent to the hospital
-        function toHospital(obj)
+        function toHospital(obj,hospital)
            buffer=location;
            buffer.x=-1;
            buffer.y=length(hospital)+1;
+           buffer.person=obj;
            empty=agent;
            empty.number=0;
            obj.place.person=empty;
            obj.place=buffer; 
+           hospital(length(hospital)+1)=buffer;
         end
         
         %gets the neighbours using getNeighbours
