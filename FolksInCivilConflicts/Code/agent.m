@@ -32,7 +32,7 @@ classdef agent < handle
     methods
         % initializes the agent-object: has basically the role of a
         % constructor, but doesn't have problems with matrices.
-        function obj=initAgent(obj,num)
+        function initAgent(obj,num)
             obj.number=num;
             if(num==0)
                 return
@@ -53,7 +53,7 @@ classdef agent < handle
         
         % Changes the satisfaction
         % We still need to define its range
-        function obj=newSat(obj)   
+        function newSat(obj)   
             
             obj.satisfaction=obj.satisfaction-(obj.place.jailtime*(obj.place.pArrest-obj.place.pAbefore)+obj.place.injury*(obj.place.pInjury-obj.place.pIbefore));
             
@@ -67,7 +67,7 @@ classdef agent < handle
 
         % Changes the two risk-values.
         % We still need to define their range
-        function obj=newRisk(obj)
+        function newRisk(obj)
                       
             obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);
             obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
@@ -88,7 +88,7 @@ classdef agent < handle
         end
         
         % Changes the total Support
-        function obj=newSup(obj)
+        function newSup(obj)
             
             obj.support=obj.support - obj.riskP + obj.riskM;
             

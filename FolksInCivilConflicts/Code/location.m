@@ -34,7 +34,7 @@ classdef location < handle
     methods
         %Constructor: initializes the constant properties
         %if the field is empty: person.number=-1;
-        function obj=initLocation(obj,x,y,jailtime,injury,vision)
+        function initLocation(obj,x,y,jailtime,injury,vision)
             obj.x=x;
             obj.y=y;
             obj.jailtime=jailtime;
@@ -43,7 +43,7 @@ classdef location < handle
         end
         
         %defines the probilites to be arrested and/or injured
-        function obj=probabilities(obj)
+        function probabilities(obj)
             obj.pArrest=(1-obj.person.support)*(1-exp(-obj.infPolice/obj.infMafia));
             obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infTot));
         end
