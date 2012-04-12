@@ -131,7 +131,13 @@ classdef agent < handle
            obj.place.person=empty;
            obj.place=buffer; 
         end
-      
+        
+        %gets the neighbours using getNeighbours
+        function [neighbours,counter] = neighbours(person,world,chooser)
+           [neighbours,counter] = getNeighbours(person,world,chooser); 
+        end
+        
+              
     end
     
 end
