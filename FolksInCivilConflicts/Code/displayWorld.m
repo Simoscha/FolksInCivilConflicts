@@ -46,8 +46,6 @@ function display = displayWorld(world)
           
        end
     end
-    
-    hold off;
-    
+    hold off
     display = 0;
 end

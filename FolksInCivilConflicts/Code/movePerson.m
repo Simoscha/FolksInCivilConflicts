@@ -6,7 +6,7 @@ function [ person,world ] = movePerson( person,world )
     empty=agent;                %creates agent
     empty.initAgent(0);         %defines it as empty
     %counter
-    if(counter>1)   %The agent can only move if there are empty fields in his neighbourhood
+    if(counter>0)   %The agent can only move if there are empty fields in his neighbourhood
         index=randi(counter,1);     %creates a random integer between 1 and the number of free neighbours
         x=neighbours(index).x;      %gets the column of the location in the world
         y=neighbours(index).y;      %gets line of the location in the world
@@ -18,7 +18,7 @@ function [ person,world ] = movePerson( person,world )
     if(person.support>0.75)     %If the agent is an active policeman
         [neighbours,counter]=getNeighbours(person, world,1); %gets the occupied neighbouring fields
         
-        if(counter==1)      %can only arrest if there are people
+        if(counter==0)      %can only arrest if there are people
             return
         end
         
@@ -36,7 +36,7 @@ function [ person,world ] = movePerson( person,world )
     if(person.support<0.25)     %If the agent is an active mafia supporter
         [neighbours,counter]=getNeighbours(person, world,1); %gets the occupied neighbouring fields
         
-        if(counter==1)      %can only injure if there are people
+        if(counter==0)      %can only injure if there are people
             return
         end
         
