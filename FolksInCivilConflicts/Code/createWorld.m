@@ -18,7 +18,7 @@ function world = createWorld(height,width,peopleAmount)
     end
     
     
-    %random distribution
+    %random distribution of the agents within the world
     size = height*width;
     randPositions = randperm(size);
     
