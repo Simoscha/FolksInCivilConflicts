@@ -8,8 +8,8 @@ function [ person,world ] = movePerson( person,world )
     %counter
     if(counter>1)   %The agent can only move if there are empty fields in his neighbourhood
         index=randi(counter,1);     %creates a random integer between 1 and the number of free neighbours
-        x=neighbours(index).x      %gets the column of the location in the world
-        y=neighbours(index).y      %gets line of the location in the world
+        x=neighbours(index).x;      %gets the column of the location in the world
+        y=neighbours(index).y;      %gets line of the location in the world
         person.place.person=empty;  %sets the previous field to empty
         world(y,x).person=person;       %sets the person variable of the new field to the person
         person.place=world(y,x);        %sets the place of the person to the new field

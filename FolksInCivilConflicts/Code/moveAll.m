@@ -17,7 +17,4 @@ function world = moveAll(world)
           movePerson(person,world);
        end
     end
-    p = agent;
-    p.initAgent(100);
-    world(1,1).person = p;
 end

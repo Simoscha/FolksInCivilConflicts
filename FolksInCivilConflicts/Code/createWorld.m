@@ -1,11 +1,13 @@
 function world = createWorld(height,width,peopleAmount)
+
+    vision = 1;
     %world = zeros(height,width);
     
     %fill with people
     for index = 0:peopleAmount-1
         p = agent;
         loc=location;
-        loc.vision = 2;
+        loc.vision = vision;
         p.place = loc;
         loc.person = p;
         p.initAgent(index+1);
@@ -15,7 +17,7 @@ function world = createWorld(height,width,peopleAmount)
     %fill empy agents for empty fields
     for index = peopleAmount:(height*width-1)
         loc=location;
-        loc.vision = 2;
+        loc.vision = vision;
         p = agent;
         p.number = 0;
         loc.person = p;
