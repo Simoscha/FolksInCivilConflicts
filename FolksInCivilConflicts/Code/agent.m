@@ -53,7 +53,6 @@ classdef agent < handle
         % example.newSat() instead
         
         % Changes the satisfaction
-        % We still need to define its range
         function newSat(obj)   
             
             obj.satisfaction=obj.satisfaction-(obj.place.jailtime*(obj.place.pArrest-obj.place.pAbefore)+obj.place.injury*(obj.place.pInjury-obj.place.pIbefore));

@@ -1,8 +1,6 @@
 function world = createWorld(height,width,peopleAmount)
 
     vision = 5;
-    jailtime=6;
-    injury=6;
      
     %world = zeros(height,width);
     
@@ -40,8 +38,7 @@ function world = createWorld(height,width,peopleAmount)
        world(x,y).y = y;
     end  
     
-    %initializes all the Locations and agents with their initial properties.
-    initAll(world,vision,jailtime,injury);
-
+    %initializes all the Locations with their initial properties.
+    initAllLocations(
     
 end

@@ -30,11 +30,8 @@ function [ person,world ] = movePerson( person,world,hospital,prison )
         y=neighbours(index).y;
         comp=rand;                  %random number between 0 and 1
         if(comp<(world(y,x).pArrest))    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
-            arrested=world(y,x).person;
-            world(y,x).person=empty; 
-            prison.y=3;
-            arrested.place.prison(length(prison)+1); %location of arrested is set to prison
-            prison(length(prison)+1)=arrested;      %the agent is added to the prison array
+            world(y,x).person.toPrison(prison);
+            ausgabe='Verhaftet'
         end
     end
     
@@ -50,11 +47,8 @@ function [ person,world ] = movePerson( person,world,hospital,prison )
         y=neighbours(index).y;        
         comp=rand;                  %random number between 0 and 1
         if(comp<world(y,x).pInjury)    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
-            injured=world(y,x).person;
-            world(y,x).person=empty;
-            hospital.y=1;
-            injured.place.hospital(length(prison)+1);   %location of injured is set to hospital
-            hospital(length(hospital)+1)=injured;       %%the agent is added to the hospital array
+            world(y,x).person.toHospital(hospital);
+            ausgabe='Verletzt'
         end
     end
     
