@@ -68,9 +68,17 @@ classdef agent < handle
         % Changes the two risk-values.
         % We still need to define their range
         function newRisk(obj)
-                      
-            obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);
-            obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
+             
+            if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0)
+                obj.riskP=1;
+            else
+                obj.riskP=obj.courage*(obj.satisfaction*obj.place.pArrest*obj.place.jailtime)^(-1);
+            end
+            if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0)
+                obj.riskM=1;
+            else
+            obj.riskM=obj.courage*(obj.satisfaction*obj.place.pInjury*obj.place.injury)^(-1);
+            end
             
             if(obj.riskP>1)
                 obj.riskP=1;

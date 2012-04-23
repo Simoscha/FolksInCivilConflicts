@@ -1,4 +1,4 @@
-function [ output_args ] = updateAll( input_args )
+function [  ] = updateAll( world )
 %UPDATEALL Summary of this function goes here
 %   Detailed explanation goes here
 % updates all the Locations with their new values of Influence and
