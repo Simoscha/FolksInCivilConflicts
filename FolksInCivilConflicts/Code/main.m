@@ -12,7 +12,6 @@ before
     hospital=location;
     hospital.x=-1;
     hospital.y=3;
-initAll(world,1,5,5);
     
 for index = 1:5;
     displayWorld(world);
