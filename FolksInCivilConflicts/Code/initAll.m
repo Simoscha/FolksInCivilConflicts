@@ -14,9 +14,10 @@ function [] = initAll( world,vision,jailtime,injury )
            world(k2,k1).initLocation(k1,k2,jailtime,injury,vision) %initializes the constant values
                
            %the person and his constant values on the Location has to be already known
-               
-           world(k2,k1).newInfluences(world); %initializes the Influence of Police Mafia and TOT
-           world(k2,k1).probabilities;         % initializes the probabilites to get hurt or arrested
+           if(world(k2,k1).person.number~=0)    
+            world(k2,k1).newInfluences(world); %initializes the Influence of Police Mafia and TOT
+            world(k2,k1).probabilities;         % initializes the probabilites to get hurt or arrested
+           end
         end
     end
     

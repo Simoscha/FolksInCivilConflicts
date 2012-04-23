@@ -42,6 +42,7 @@ function world = createWorld(height,width,peopleAmount)
     
     %initializes all the Locations and agents with their initial properties.
     initAll(world,vision,jailtime,injury);
+    hallo='initialisiert'
 
     
 end

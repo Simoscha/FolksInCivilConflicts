@@ -24,9 +24,9 @@ classdef location < handle
        infTot           %Sum of the influences of all agents within vision
        % The influences have to be defined from the outside as they depend
        % from oder location-objects
-       pArrest=0        %probability that an Agent is arrested standig here (at the beginning =0 so that in the first change the pAbefore is set to 0)
+       pArrest        %probability that an Agent is arrested standig here (at the beginning =0 so that in the first change the pAbefore is set to 0)
        pAbefore       %probability of Arrest one iteration step before 
-       pInjury=0        %probability that an Agent is injured standig here
+       pInjury        %probability that an Agent is injured standig here
        pIbefore       %probability of Injury one iteration step before (at the beginning =0 so that in the first change the pIbefore is set to 0)
        
     end
@@ -39,15 +39,33 @@ classdef location < handle
             obj.y=y;
             obj.jailtime=jailtime;
             obj.injury=injury;
-            obj.vision=vision;          
+            obj.vision=vision;
+            obj.infMafia=0;
+            obj.infPolice=0;
+            obj.infTot=0;
+            obj.pArrest=0;
+            obj.pInjury=0;
+            obj.pAbefore=0;
+            obj.pIbefore=0;
         end
         
         %defines the probilites to be arrested and/or injured
         function probabilities(obj)
             obj.pAbefore=obj.pArrest;   
-            obj.pIbefore=obj.pInjury;   
+            obj.pIbefore=obj.pInjury;
+            if(obj.person.number==0)
+                return
+            end
+            if(obj.infMafia==0)
+               obj.pArrest=(1-obj.person.support);
+            else
             obj.pArrest=(1-obj.person.support)*(1-exp(-obj.infPolice/obj.infMafia));
+            end
+            if(obj.infTot==0)
+               obj.pInjury=(obj.person.support);
+            else
             obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infTot));
+            end
         end
         
         %defines the new influences of Mafia, Police and Total
@@ -57,6 +75,9 @@ classdef location < handle
             obj.infMafia=0;     
             obj.infPolice=0;
             obj.infTot=0;
+            if(obj.person.number==0)
+                return
+            end
             obj.person.place=obj;   %to be safe: if the agent isn't properly defined
             [neighbours,amount]=getNeighbours(obj.person,world,1);
             for k=1:amount
