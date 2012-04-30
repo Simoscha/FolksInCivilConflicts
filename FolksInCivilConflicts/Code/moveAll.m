@@ -14,7 +14,7 @@ function world = moveAll(world,hospital,prison)
        if(0 == world(y,x).person.number)
           %no person in this field, do nothing 
        else
-          person = world(y,x).person;
+          person = world(y,x).person; %weglassen??
           movePerson(person,world,hospital,prison);
        end
     end

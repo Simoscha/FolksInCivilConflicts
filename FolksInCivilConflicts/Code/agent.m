@@ -67,20 +67,24 @@ classdef agent < handle
 
         % Changes the two risk-values.
         function newRisk(obj)
-             
-            if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0) %would result in dividing by zero
+             %updates the Risk against the Police
+            if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0) %would result in dividing by zero (is most likely triggered by pArrest=0 (for example if there are no neighbours present)
                 obj.riskP=1;
             else
 
-                obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);
-                
+                obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);  
             end
-            if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) %would result in dividing by zero
+            
+            %updates the Risk against the Mafia
+            if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) %would result in dividing by zero (most likely because there are no mafia-members so pInjury=0
                 obj.riskM=1;
             else
             obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
             end
             
+            % For Safety: The Risks have to be between 0 and 1: if they
+            % exceed their boundaries they're just set to the
+            % boundary-values
             if(obj.riskP>1)
                 obj.riskP=1;
             end
@@ -99,6 +103,7 @@ classdef agent < handle
         % Changes the total Support
         function newSup(obj)
             
+            %updates the Support-Value
             obj.support=obj.support - obj.riskP + obj.riskM;
             
             %If the support would be leave the defined area: just set it to
@@ -115,28 +120,41 @@ classdef agent < handle
                
         %sends agent to prison
         function toPrison(obj,prison)      
-           buffer=location;
-           buffer.x=-2;
-           buffer.y=length(prison)+1;
-           buffer.person=obj;
+           %Create a prison-Cell-location where the agent will be put
+           prisonCell=location;
+           %initialize it with x=-2, y=position in the prison-array,the
+           %jailtime (how long the prisoner has to stay there), vision and
+           %injury are unimportant so just set them to zero
+           prisonCell.initLocation(-2,length(prison)+1,obj.place.jailtime,0,0),
+           %Set the Person in the Cell to the given agent
+           prisonCell.person=obj;
+           %create an empty-agent and set the place where the arrested
+           %agent stood to empty
            empty=agent;
            empty.number=0;
            obj.place.person=empty;
-           obj.place=buffer; 
-           prison(length(prison)+1)=buffer;
+           %sets the location of the arrested person to his prison cell
+           obj.place=prisonCell; 
+           %attaches the prisonCell to the prison array at its end.
+           prison(length(prison)+1)=prisonCell;
         end
         
         %sends agent to the hospital
         function toHospital(obj,hospital)
-           buffer=location;
-           buffer.x=-1;
-           buffer.y=length(hospital)+1;
-           buffer.person=obj;
+           %create new location with the "hospital-room"
+           room=location;
+           %initialize it with x=-2, y=position in the prison-array usw
+           room.initLocation(-1,length(hospital)+1,0,obj.place.injury,0);
+           %sets the rooms person to the patient
+           room.person=obj;
+           %make new agent to set on the now empty field
            empty=agent;
            empty.number=0;
            obj.place.person=empty;
-           obj.place=buffer; 
-           hospital(length(hospital)+1)=buffer;
+           %says to the patient where he is now
+           obj.place=room; 
+           %attaches the room to the hospital array
+           hospital(length(hospital)+1)=room;
         end
         
         %gets the neighbours using getNeighbours (unnecessary but nice)

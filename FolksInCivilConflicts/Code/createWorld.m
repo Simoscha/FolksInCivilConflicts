@@ -1,6 +1,6 @@
 function world = createWorld(height,width,peopleAmount)
 
-    vision = 5;
+    vision = 1;
     jailtime=6;
     injury=6;
      
