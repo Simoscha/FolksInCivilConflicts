@@ -1,7 +1,7 @@
 close all
 clear all
 
-
+cycles = 5;
 world = createWorld(30,30,150);
 [agent,before]=findAgents(world);
 before
@@ -13,11 +13,15 @@ before
     hospital.x=-1;
     hospital.y=3;
     
-for index = 1:5;
+for index = 1:cycles;
+    [agents,amount] = findAgents(world);
+    statistics(index,:) = getStatistics(agents,amount);
     displayWorld(world);
     moveAll(world,hospital,prison);
-    updateAll(world);
+    %updateAll(world);
 end
 
 [agents,amount] = findAgents(world);
 amount
+
+plotStatistics(statistics,cycles);
