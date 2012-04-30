@@ -18,6 +18,9 @@ for index = 1:cycles;
     statistics(index,:) = getStatistics(agents,amount);
     displayWorld(world);
     moveAll(world,hospital,prison);
+    
+    checkReentry(world,hospital, prison);
+    
     %updateAll(world);
 end
 
