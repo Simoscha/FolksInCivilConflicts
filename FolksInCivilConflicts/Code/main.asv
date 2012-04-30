@@ -1,18 +1,34 @@
 close all
 clear all
 
-global prison
-global hospital
+cycles = 10;
+numPerson=90;
+world = createWorld(10,10,numPerson);
+[agent,before]=findAgents(world);
+before
 
-world = createWorld(30,30,2);
+    prison(numPerson/2)=location;
+    prison.x=-2;
+    prison.y=1;
+    hospital(numPerson/2)=location;
+    hospital.x=-1;
+    hospital.y=1;
 
-displayWorld(world);
-
-moveAll(world);
-
-displayWorld(world);
-moveAll(world);
-dis
+for index = 1:cycles;
+    [agents,amount] = findAgents(world);
+    statistics(index,:) = getStatistics(agents,amount);
+    displayWorld(world);
+    moveAll(world,hospital,prison);
+    updateAll(world);
+    
+    
+    
+    %checkReentry(world,hospital, prison);
+    
+    %updateAll(world);
+end
 
 [agents,amount] = findAgents(world);
 amount
+
+plotStatistics(statistics,cycles);

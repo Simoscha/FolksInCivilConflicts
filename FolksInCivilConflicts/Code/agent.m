@@ -11,6 +11,7 @@ classdef agent < handle
     %   Detailed explanation goes here
     % Beschreibt einen Agent     
     
+   
     properties
     
         number      % Falls man etwas auswerten will, bei dem man die Agents identifizieren muss und bsp. number=0 heisst, kein Agent (für Feld)
@@ -119,13 +120,16 @@ classdef agent < handle
         end
                
         %sends agent to prison
-        function toPrison(obj,prison)      
+        function toPrison(obj)      
+           
+           global prison;
+            
            %Create a prison-Cell-location where the agent will be put
            prisonCell=location;
            %initialize it with x=-2, y=position in the prison-array,the
            %jailtime (how long the prisoner has to stay there), vision and
            %injury are unimportant so just set them to zero
-           prisonCell.initLocation(-2,length(prison)+1,obj.place.jailtime,0,0),
+           prisonCell.initLocation(-2,length(prison)+1,obj.place.jailtime,0,0);
            %Set the Person in the Cell to the given agent
            prisonCell.person=obj;
            %create an empty-agent and set the place where the arrested
@@ -137,10 +141,18 @@ classdef agent < handle
            obj.place=prisonCell; 
            %attaches the prisonCell to the prison array at its end.
            prison(length(prison)+1)=prisonCell;
+           %{
+           output1='Prison'
+           output2=obj.number
+           output3=length(prison)
+           %}
         end
         
         %sends agent to the hospital
-        function toHospital(obj,hospital)
+        function toHospital(obj)
+            
+            global hospital;
+            
            %create new location with the "hospital-room"
            room=location;
            %initialize it with x=-2, y=position in the prison-array usw
@@ -155,6 +167,23 @@ classdef agent < handle
            obj.place=room; 
            %attaches the room to the hospital array
            hospital(length(hospital)+1)=room;
+           %{
+           output1='Spital'
+           output2=obj.number
+           output3=length(hospital)
+           %}
+        end
+        
+        %moves an agent to a new location
+        function moveTo(obj,target)
+            %creates empty agent
+            empty=agent;
+            empty.initAgent(0);
+            
+            obj.place.person=empty; %old field is now empty
+            target.person=obj;  %new field is now set to the agent
+            obj.place=target;   %the agent is now set to the new field
+            
         end
         
         %gets the neighbours using getNeighbours (unnecessary but nice)

@@ -1,3 +1,9 @@
+global halo;
+halo=5;
+test2;
+
+
+%{
 p=agent;
 p.initAgent(1);
 loc=location;
@@ -14,3 +20,4 @@ p.riskM
 p.riskP
 p.newSup;
 p.support
+%}

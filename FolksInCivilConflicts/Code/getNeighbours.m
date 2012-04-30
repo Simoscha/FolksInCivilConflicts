@@ -9,7 +9,7 @@ function [ neighbours,counter ] = getNeighbours( person,world,chooser )
     x=person.place.x;
     y=person.place.y;
     counter=0;
-    %neighbours=zeros(vision^2,1);   %initializes the array of empty neighbouring fields
+    neighbours((2*vision+1)^2,1)=Location;   %allocates space for the Location-Array
     for k1=x-vision:x+vision        %geht die Spalten durch
         for k2=y-vision:y+vision    %geht die Zeilen durch
             if(k1>0 && k2>0 && k1<width && k2<height)

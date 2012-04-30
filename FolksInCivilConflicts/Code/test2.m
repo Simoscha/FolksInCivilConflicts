@@ -1,3 +1,7 @@
+global halo;
+halo
+
+%{
 main;
 counter=0;
 for k1=1:20
@@ -10,3 +14,4 @@ for k1=1:20
     end
 
 end
+%}

@@ -53,10 +53,15 @@ classdef location < handle
         function probabilities(obj)
             obj.pAbefore=obj.pArrest;   
             obj.pIbefore=obj.pInjury;
-            if(obj.person.number==0)
+            if(obj.person.number==0) %empty field not interesting
                 return
             end
-            if(obj.infMafia==0)
+            %test if agent on the field is properly initialized
+            if(obj.person.place~=obj)
+                warning('agent not properly initialized: in location.probabilities')
+            end
+            %adjust the influences
+            if(obj.infMafia==0) %would be dividing by 0
                obj.pArrest=(1-obj.person.support);
             else
             obj.pArrest=(1-obj.person.support)*(1-exp(-obj.infPolice/obj.infMafia));
@@ -75,11 +80,18 @@ classdef location < handle
             obj.infMafia=0;     
             obj.infPolice=0;
             obj.infTot=0;
-            if(obj.person.number==0)
+            if(obj.person.number==0)    %empty field: no need to update
                 return
             end
-            obj.person.place=obj;   %to be safe: if the agent isn't properly defined
+             %to be safe: if the agent isn't properly defined: give a
+             %warning
+            if(obj.person.place~=obj)
+                warning('agent not properly initialized: in location.newInfluences')
+            end
+            
+            %get the neighbouring non-empty fields
             [neighbours,amount]=getNeighbours(obj.person,world,1);
+            %adds up all the influences
             for k=1:amount
                 obj.infTot=obj.infTot+neighbours(k).person.influence;
                 if(neighbours(k).person.support>0.75)

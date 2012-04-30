@@ -1,4 +1,4 @@
-function world = moveAll(world)
+function [world,prison] = moveAll(world,hospital,prison)
     height = length(world(:,1));
     width = length(world(1,:));
     
@@ -13,7 +13,7 @@ function world = moveAll(world)
           %no person in this field, do nothing
           continue;
        else
-          movePerson(world(y,x).person,world);
+          movePerson(world(y,x).person,world,hospital,prison);
        end
     end
 end

@@ -1,8 +1,11 @@
 function world = createWorld(height,width,peopleAmount)
 
-    vision = 5;
+    vision = 1;
+    jailtime=6;
+    injury=6;
      
-    %world = zeros(height,width);
+    world(height,width) = location; %allocates memory for the world array
+    
     
     %fill with people
     for index = 0:peopleAmount-1
@@ -38,7 +41,9 @@ function world = createWorld(height,width,peopleAmount)
        world(x,y).y = y;
     end  
     
-    %initializes all the Locations with their initial properties.
-    initAllLocations(
+    %initializes all the Locations and agents with their initial properties.
+    initAll(world,vision,jailtime,injury);
+    hallo='initialisiert'
+
     
 end

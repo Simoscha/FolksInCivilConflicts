@@ -4,7 +4,8 @@ function world = createWorld(height,width,peopleAmount)
     jailtime=6;
     injury=6;
      
-    %world = zeros(height,width);
+    world(height,width) = location; %allocates memory for the world array
+    tempWorld(height,width) = location; %allocates memory for the tempWorld array
     
     %fill with people
     for index = 0:peopleAmount-1

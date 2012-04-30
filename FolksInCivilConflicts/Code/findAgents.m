@@ -5,7 +5,7 @@ function [ agents,finderCounter ] = findAgents( world )
 
 width=length(world(1,:));
 heigth=length(world(:,1));
-
+agents(heigth,width)=agent;     %allocates memory for the agents array
 finderCounter=0;
 for k1=1:width
     for k2=1:heigth
