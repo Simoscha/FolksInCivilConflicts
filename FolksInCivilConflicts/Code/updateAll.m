@@ -13,8 +13,10 @@ function [  ] = updateAll( world )
     % update Locations
     for k1=1:width
         for k2=1:height
-           world(k2,k1).newInfluences(world);  % updates the Influence of Police Mafia and TOT
-           world(k2,k1).probabilities;         % updates the probabilites to get hurt or arrested
+           if(world(k2,k1).person.number~=0) %if not an empty field
+            world(k2,k1).newInfluences(world);  % updates the Influence of Police Mafia and TOT
+            world(k2,k1).probabilities;         % updates the probabilites to get hurt or arrested
+           end
         end
     end
     
