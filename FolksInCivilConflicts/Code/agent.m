@@ -25,6 +25,9 @@ classdef agent < handle
         support        % Total Support
         riskM         % Risk, the agent is ready to assume against Mafia
         riskP         % Risk, the agent is ready to assume against Police
+        
+        jailtime         %how long an arrested agent has to stay in jail
+        injury           %how long an injured agent has to stay in the hospital
     
     
     end
@@ -132,6 +135,8 @@ classdef agent < handle
            prisonCell.initLocation(-2,length(prison)+1,obj.place.jailtime,0,0);
            %Set the Person in the Cell to the given agent
            prisonCell.person=obj;
+           %take the jailtime from the place
+           prisonCell.person.jailtime = obj.place.jailtime;
            %create an empty-agent and set the place where the arrested
            %agent stood to empty
            empty=agent;
@@ -159,6 +164,8 @@ classdef agent < handle
            room.initLocation(-1,length(hospital)+1,0,obj.place.injury,0);
            %sets the rooms person to the patient
            room.person=obj;
+           %take the injury from the place
+           room.person.injury = obj.place.injury;
            %make new agent to set on the now empty field
            empty=agent;
            empty.number=0;
