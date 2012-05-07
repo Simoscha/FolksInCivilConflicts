@@ -66,10 +66,10 @@ classdef location < handle
             else
             obj.pArrest=(1-obj.person.support)*(1-exp(-obj.infPolice/obj.infMafia));
             end
-            if(obj.infTot==0)
+            if(obj.infPolice==0)
                obj.pInjury=(obj.person.support);
             else
-            obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infTot));
+            obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infPolice));
             end
         end
         
