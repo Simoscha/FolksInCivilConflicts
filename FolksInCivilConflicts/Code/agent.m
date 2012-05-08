@@ -26,8 +26,8 @@ classdef agent < handle
         riskM         % Risk, the agent is ready to assume against Mafia
         riskP         % Risk, the agent is ready to assume against Police
         
-        jailtime         %how long an arrested agent has to stay in jail
-        injury           %how long an injured agent has to stay in the hospital
+        jailtime         %how long an arrested agent has to stay in jail: used for the checkReentry function
+        injury           %how long an injured agent has to stay in the hospital: used for the checkReentry function
     
     
     end
