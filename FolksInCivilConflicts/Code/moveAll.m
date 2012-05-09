@@ -6,8 +6,8 @@ function world = moveAll(world)
     randPositions = randperm(height*width);
     
     for index = 0:height*width-1
-       x = floor((randPositions(index+1)-1)/width)+1;
-       y = mod(randPositions(index+1)-1,width)+1;
+       y = floor((randPositions(index+1)-1)/width)+1;
+       x = mod(randPositions(index+1)-1,width)+1;
        
        if(0 == world(y,x).person.number)
           %no person in this field, do nothing

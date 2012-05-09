@@ -26,18 +26,17 @@ function world = createWorld(init)
         tempWorld(floor(index/width)+1,mod(index,width)+1) = loc;
     end
     
-    
     %random distribution of the agents within the world
     size = height*width;
     randPositions = randperm(size);
     
-    for index = 0:height*width-1
-       x = floor((randPositions(index+1)-1)/width)+1;
-       y = mod(randPositions(index+1)-1,width)+1;
-       world(x,y) =  tempWorld(floor(index/width)+1,mod(index,width)+1);
-       world(x,y).x = x;
-       world(x,y).y = y;
-    end  
+    for index = 0:size-1
+       y = floor((randPositions(index+1)-1)/width)+1;
+       x = mod(randPositions(index+1)-1,width)+1;
+       world(y,x) =  tempWorld(floor(index/width)+1,mod(index,width)+1);
+       world(y,x).x = x;
+       world(y,x).y = y;
+    end 
     
     %initializes all the Locations and agents with their initial properties.
     initAll(world,init.model.n_vision,init.model.n_jailtime,init.model.n_injury);

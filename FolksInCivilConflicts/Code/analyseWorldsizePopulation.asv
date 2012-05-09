@@ -1,0 +1,18 @@
+function [] = analyseWorldsizePopulation(init)
+    hold on;
+    view(0,90);
+    for indexPopulation = 1:size(init.model.param_agents)
+       for indexWorldsize = 1:size(init.model.param_worldHeight)
+            load(strcat('data/world_',int2str(init.model.param_agents(indexPopulation)),'_',int2str(init.model.param_worldHeight(indexWorldsize)),'x',int2str(init.model.param_worldWidth(indexWorldsize))));
+            %get the last world
+            world = worldArray
+            [agents,amount] = findAgents(world);
+            
+            surf(indexPopulation,indexWorldsize,M,'EdgeColor','none');
+            colorbar;
+            set(gca,'FontSize',14)
+            xlabel('Population');
+            ylabel('World size'); 
+       end
+    end
+end
