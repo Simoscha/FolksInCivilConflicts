@@ -31,6 +31,5 @@ function [  ] = updateAll( world )
         end
     end
 
-
 end
 

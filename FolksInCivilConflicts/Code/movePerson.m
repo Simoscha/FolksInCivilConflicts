@@ -59,8 +59,5 @@ function [ person,world ] = movePerson( person,world)
         end
     end
     
-    
-    
-
 end
 
