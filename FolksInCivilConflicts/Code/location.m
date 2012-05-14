@@ -49,6 +49,23 @@ classdef location < handle
             obj.pIbefore=0;
         end
         
+        %Updates Injury and Jailtime: the more policemen and the less mafia
+        %members there are the less the jailtime will become
+        function newPenalties(obj,world)
+           [nPolice,nMafia] = totalActives(world);
+           
+           obj.pArrest=obj.pArrest + round(nMafia/nPolice - nPolice/nMafia); %round rounds to integer
+           if(obj.jailtime<1)   %doesnt make sense if it is below 1
+               obj.jailtime=1;
+           end
+           
+           obj.pInjury=obj.pInjury + round( - nMafia/nPolice + nPolice/nMafia);
+           if(obj.injury<1)   %doesnt make sense if it is below 1
+               obj.injury=1;
+           end
+
+        end
+        
         %defines the probilites to be arrested and/or injured
         function probabilities(obj)
             obj.pAbefore=obj.pArrest;   

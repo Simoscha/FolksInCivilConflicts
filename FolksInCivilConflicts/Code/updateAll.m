@@ -20,7 +20,6 @@ function [  ] = updateAll( world )
             if(world(k2,k1).person.place~=world(k2,k1))
                 warning('agent not properly initialized: in updateAll')
             end
-            
             world(k2,k1).newInfluences(world);  % updates the Influence of Police Mafia and TOT
             world(k2,k1).probabilities;         % updates the probabilites to get hurt or arrested
             
