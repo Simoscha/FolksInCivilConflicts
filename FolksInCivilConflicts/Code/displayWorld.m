@@ -22,6 +22,12 @@ function [] = displayWorld(world)
           
        end
     end
+    set(gca,'FontSize',14)
+    xlabel('x-coordinate');
+    ylabel('y-coordinate');
+    colormap([1 0 0; 0.5 0 0.5; 0 0 1]);
+    labels = {'policeman','normal','mafia'};
+    lcolorbar(labels,'fontweight','bold'); 
     hold off
     drawnow
 end

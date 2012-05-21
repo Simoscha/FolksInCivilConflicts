@@ -23,7 +23,7 @@ function [] = analyseJailtimeInjury(init)
     view(0,90);
     surf(x,y,averageSatisfactionArray);
     colorbar;
-    set(gca,'FontSize',14)
+    set(gca,'FontSize',14);
     xlabel('Jailtime');
     ylabel('Injury');
     zlabel('Satisfaction');

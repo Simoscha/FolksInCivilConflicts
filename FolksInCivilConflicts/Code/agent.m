@@ -23,10 +23,10 @@ classdef agent < handle
         place          % present location of the agent
         satisfaction
         support        % Total Support
-        riskM         % Risk, the agent is ready to assume against Mafia
+        riskM         % Risk, the agent is ready to assume against Mafia 
         riskP         % Risk, the agent is ready to assume against Police
         
-        pAbefore       %probability of Arrest one iteration step before
+        pAbefore       %probability of Arrest one iteration step before: better here then in location because the agent is moving and has to take it with him...
         pIbefore       %probability of Injury one iteration step before (at the beginning =0 so that in the first change the pIbefore is set to 0)
           
     
@@ -82,14 +82,14 @@ classdef agent < handle
                 obj.riskP=0;
             else
 
-                obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);  
+                obj.riskP=(1-obj.support)*obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);  
             end
             
             %updates the Risk against the Mafia
             if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) %would result in dividing by zero (most likely because there are no mafia-members so pInjury=0
                 obj.riskM=0;
             else
-                obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
+                obj.riskM=obj.support*obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
             end
             
             % For Safety: The Risks have to be between 0 and 1: if they
@@ -152,6 +152,7 @@ classdef agent < handle
            obj.place=prisonCell; 
            %attaches the prisonCell to the prison array at its end.
            prison(length(prison)+1)=prisonCell;
+           obj.satisfaction=obj.satisfaction/(obj.place.jailtime/2); %being arrested severely lessens the satisfaction obviously: the more so the longer the jailtime is
            %{
            output1='Prison'
            output2=obj.number
@@ -180,6 +181,7 @@ classdef agent < handle
            obj.place=room; 
            %attaches the room to the hospital array
            hospital(length(hospital)+1)=room;
+            obj.satisfaction=obj.satisfaction/(obj.place.injury/2); %being injured severely lessens the satisfaction obviously: the more so the more severe the injury is
            %{
            output1='Spital'
            output2=obj.number

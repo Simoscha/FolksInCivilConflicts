@@ -191,9 +191,9 @@ conffile
 load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1))));
 rCount = 1;
 pause on
-for index = 1:(length(worldArray(:,1))/(init.model.n_worldHeight));
+for index = 1:(length(worldArray(:,1))/(init.model.param_worldHeight(1)));
     index
-    world = worldArray(1 + ((index-1)*init.model.n_worldHeight):index*init.model.n_worldHeight,(1 + (rCount-1)*init.model.n_worldWidth):rCount*init.model.n_worldWidth);
+    world = worldArray(1 + ((index-1)*init.model.param_worldHeight(1)):index*init.model.param_worldHeight(1),(1 + (rCount-1)*init.model.param_worldWidth(1)):rCount*init.model.param_worldWidth(1));
     displayWorld(world);
     pause(0.1)
 end
@@ -209,8 +209,8 @@ path(path,'conf/');
 %load the configuration file
 conffile
 %load saved world data
-%load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1))));
-load('data/world_3_7');
+load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1))));
+%load('data/world_3_7');
 plotStatistics(statistics,(length(statistics(:,1))));
 
 %% world size & population -> satisfaction
