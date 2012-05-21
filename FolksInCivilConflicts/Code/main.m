@@ -1,4 +1,4 @@
-%% Do the simulation
+%% Do the simulation Population against Worldsize
 
 % Clear workspace
 close all
@@ -88,7 +88,7 @@ for indexPopulation = 1:length(init.model.param_agents)
     end
 end
 
-%% Do the simulation
+%% Do the simulation Jailtime against Injury
 
 % Clear workspace
 close all
@@ -181,20 +181,21 @@ end
 % Clear workspace
 close all
 clear all
-clc
+
 % Add other directories to path
 path(path,'conf/');
 %load the configuration file
 conffile
 %load saved world data
-load('worldAlphaSim');
+%load('worldAlphaSim');
+load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1))));
 rCount = 1;
 pause on
 for index = 1:(length(worldArray(:,1))/(init.model.n_worldHeight));
     index
     world = worldArray(1 + ((index-1)*init.model.n_worldHeight):index*init.model.n_worldHeight,(1 + (rCount-1)*init.model.n_worldWidth):rCount*init.model.n_worldWidth);
     displayWorld(world);
-    pause(.5)
+    pause(0.1)
 end
 
 %% show statistic
@@ -208,7 +209,8 @@ path(path,'conf/');
 %load the configuration file
 conffile
 %load saved world data
-load('worldAlphaSim');
+%load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1))));
+load('data/world_3_7');
 plotStatistics(statistics,(length(statistics(:,1))));
 
 %% world size & population -> satisfaction

@@ -8,10 +8,11 @@ function [] = analyseJailtimeInjury(init)
             world = worldArray(1 + ((init.model.n_lifetime-1)*init.model.n_worldHeight):init.model.n_lifetime*init.model.n_worldHeight,(1 + (1-1)*init.model.n_worldWidth):1*init.model.n_worldWidth);
             [agents,amount] = findAgents(world);
             
-            averageSatisfaction = 0;
-            for index = 1:amount-1
-                averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
-            end
+            averageSatisfaction = sum([agents.satisfaction]);
+%             averageSatisfaction = 0;
+%             for index = 1:amount-1
+%                 averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
+%             end
             averageSatisfaction = averageSatisfaction/amount;
             averageSatisfactionArray(indexJailtime,indexInjury) = averageSatisfaction;
              
@@ -25,4 +26,5 @@ function [] = analyseJailtimeInjury(init)
     set(gca,'FontSize',14)
     xlabel('Jailtime');
     ylabel('Injury');
+    zlabel('Satisfaction');
 end

@@ -25,9 +25,9 @@ classdef location < handle
        % The influences have to be defined from the outside as they depend
        % from oder location-objects
        pArrest        %probability that an Agent is arrested standig here (at the beginning =0 so that in the first change the pAbefore is set to 0)
-       pAbefore       %probability of Arrest one iteration step before 
+        
        pInjury        %probability that an Agent is injured standig here
-       pIbefore       %probability of Injury one iteration step before (at the beginning =0 so that in the first change the pIbefore is set to 0)
+       
        
     end
     
@@ -45,8 +45,7 @@ classdef location < handle
             obj.infTot=0;
             obj.pArrest=0;
             obj.pInjury=0;
-            obj.pAbefore=0;
-            obj.pIbefore=0;
+            
         end
         
         %Updates Injury and Jailtime: the more policemen and the less mafia
@@ -68,8 +67,7 @@ classdef location < handle
         
         %defines the probilites to be arrested and/or injured
         function probabilities(obj)
-            obj.pAbefore=obj.pArrest;   
-            obj.pIbefore=obj.pInjury;
+            
             if(obj.person.number==0) %empty field not interesting
                 return
             end
@@ -94,9 +92,9 @@ classdef location < handle
         function newInfluences(obj,world)
             % the new influences don't depend on the old ones so first set
             % them all to zero
-            obj.infMafia=0;     
-            obj.infPolice=0;
-            obj.infTot=0;
+            obj.infMafia=-2;     
+            obj.infPolice=-2;
+            obj.infTot=-2;
             if(obj.person.number==0)    %empty field: no need to update
                 return
             end
@@ -117,6 +115,12 @@ classdef location < handle
                 if(neighbours(k).person.support<0.25)
                     obj.infMafia=obj.infMafia+neighbours(k).person.influence;
                 end
+            end
+            if(obj.person.support>0.75)
+                obj.infPolice=obj.infPolice + obj.person.influence;
+            end
+            if(obj.person.support<0.25)
+                obj.infMafia=obj.infMafia+obj.person.influence;
             end
         end
         

@@ -34,20 +34,20 @@ globals = struct('dumpDir', dumpDir, ...
 % parameters ranges. This way we prepare already the data in an appropriate
 % format to perform parameter sweeping
 
-n_lifetime = 10; %rounds to simulate
-n_worldHeight = [10];
-n_worldWidth = [10];
-n_agents = [30];       % number of agents
+n_lifetime = 50; %rounds to simulate
+n_worldHeight = [15];
+n_worldWidth = [15];
+n_agents = [50];       % number of agents
 n_vision = [1];
-n_jailtime = [6];
-n_injury = [10];
+n_jailtime = [20];
+n_injury = [2];
 
-param_agents = [20:5:70];
-param_worldHeight = [10:1:20];
-param_worldWidth = [10:1:20];
+param_agents = [10:5:55];
+param_worldHeight = [10:2:28];
+param_worldWidth = [10:2:28];
 
-param_jailtime = [1:1:10];
-param_injury = [1:1:10];
+param_jailtime = [2:1:10];
+param_injury = [2:1:10];
 
 
 model = struct('n_lifetime' , n_lifetime, ...

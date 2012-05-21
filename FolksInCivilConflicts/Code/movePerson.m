@@ -19,9 +19,42 @@ function [ person,world ] = movePerson( person,world)
         index=randi(counter,1);     %creates a random integer between 1 and the number of free neighbours
         
         if(index~=counter)              %if index==counter: person doesn't move at all
-            x=neighbours(index).x;      %gets the column of the location in the world
-            y=neighbours(index).y;      %gets line of the location in the world
-            person.moveTo(world(y,x));  %moves the agent to his new location and sets all the member variables
+%             x=neighbours(index).x;      %gets the column of the location in the world
+%             y=neighbours(index).y;      %gets line of the location in the world
+%             person.moveTo(world(y,x));  %moves the agent to his new location and sets all the member variables
+            
+            if(person.support>0.75)
+                %police move random
+                x=neighbours(index).x;      %gets the column of the location in the world
+                y=neighbours(index).y;      %gets line of the location in the world
+                person.moveTo(world(y,x));
+            elseif(person.support<0.25)
+                %mafia stay in mafia place
+                maxInf = -1;
+                indexMax = 1;
+                for index = 1:counter
+                    if(neighbours(index).infMafia > maxInf)
+                       maxInf = neighbours(index).infMafia;
+                       indexMax = index;
+                    end
+                end
+                x=neighbours(indexMax).x;  
+                y=neighbours(indexMax).y;
+                person.moveTo(world(y,x));
+            else
+                %normal people move around police
+                maxInf = -1;
+                indexMax = 1;
+                for index = 1:counter
+                    if(neighbours(index).infPolice > maxInf)
+                       maxInf = neighbours(index).infPolice;
+                       indexMax = index;
+                    end
+                end
+                x=neighbours(indexMax).x;  
+                y=neighbours(indexMax).y;
+                person.moveTo(world(y,x));
+            end
         end
     end
         
@@ -35,6 +68,7 @@ function [ person,world ] = movePerson( person,world)
         index=randi(counterA,1); %random integer 
         x=neighboursA(index).x;  %the field to check
         y=neighboursA(index).y;
+        
         comp=rand;                  %random number between 0 and 1
         if(comp<(world(y,x).pArrest))    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
             world(y,x).person.toPrison();
