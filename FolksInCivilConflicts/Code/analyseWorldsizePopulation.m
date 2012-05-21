@@ -25,4 +25,5 @@ function [] = analyseWorldsizePopulation(init)
     set(gca,'FontSize',14)
     xlabel('Population');
     ylabel('World size');
+    zlabel('Satisfaction');
 end
