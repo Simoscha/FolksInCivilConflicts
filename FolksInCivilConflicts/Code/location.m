@@ -92,9 +92,9 @@ classdef location < handle
         function newInfluences(obj,world)
             % the new influences don't depend on the old ones so first set
             % them all to zero
-            obj.infMafia=-2;     
-            obj.infPolice=-2;
-            obj.infTot=-2;
+            obj.infMafia=-3;     
+            obj.infPolice=-3;
+            obj.infTot=-3;
             if(obj.person.number==0)    %empty field: no need to update
                 return
             end

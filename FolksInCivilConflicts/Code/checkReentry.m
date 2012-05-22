@@ -6,11 +6,13 @@ function [] = checkReentry(init,world)
    while(index <= prisonlength)
       prison(index).jailtime = prison(index).jailtime - 1;
       if(prison(index).jailtime <= 0)
+         %set satisfaction back
+         prison(index).person.satisfaction=prison(index).person.satisfaction*(prison(index).person.place.jailtime/2);
          reentry(world,prison(index).person);
          prison(index) = [];
          prisonlength = prisonlength - 1;
          if(init.globals.DEBUG)
-             disp('back')
+             disp('released')
          end
       else
          index = index + 1;
@@ -22,8 +24,10 @@ function [] = checkReentry(init,world)
    while(index <= hospitallength)
       hospital(index).injury = hospital(index).jailtime - 1;
       if(hospital(index).injury <= 0)
+          %set satisfaction back
+          hospital(index).person.satisfaction=hospital(index).person.satisfaction*(hospital(index).person.place.injury/2);
           reentry(world,hospital(index).person);
-          hospital(index) = [];
+          hospital(index)= [];
           hospitallength = hospitallength - 1;
           if(init.globals.DEBUG)
              disp('health')

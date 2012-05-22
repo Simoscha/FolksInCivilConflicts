@@ -6,8 +6,10 @@ function statistics = getStatistics(agents,amount)
     % 4. RiskP
     averageSatisfaction = 0;
     for index = 1:amount
+        %agents(index)
         averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
     end
+    averageSatisfaction
     statistics(1) = averageSatisfaction/amount;
     
     averageSupport = 0;

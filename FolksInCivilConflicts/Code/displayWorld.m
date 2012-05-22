@@ -26,7 +26,7 @@ function [] = displayWorld(world)
     xlabel('x-coordinate');
     ylabel('y-coordinate');
     colormap([1 0 0; 0.5 0 0.5; 0 0 1]);
-    labels = {'policeman','normal','mafia'};
+    labels = {'mafia','normal','police'};
     lcolorbar(labels,'fontweight','bold'); 
     hold off
     drawnow

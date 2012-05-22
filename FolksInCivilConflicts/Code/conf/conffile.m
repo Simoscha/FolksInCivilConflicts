@@ -11,7 +11,7 @@ version = 1;
 dumpDir = 'dump/';      % or use the routine to generate a unique dir
 
 VIDEO = 0;              % Display real time video
-DEBUG = 0;              % Output more verbose 
+DEBUG = 1;              % Output more verbose 
 DUMP = 1;               % Save the results in an external file
 
 COMPUTATION = 0;        % In case you have different engine (e.g. cluster, 
@@ -39,8 +39,8 @@ n_worldHeight = [15];
 n_worldWidth = [15];
 n_agents = [50];       % number of agents
 n_vision = [1];
-n_jailtime = [10];
-n_injury = [5];
+n_jailtime = [2];
+n_injury = [2];
 
 param_agents = [50:5:50];
 param_worldHeight = [15:1:15];

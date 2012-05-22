@@ -11,4 +11,5 @@ function [] = reentry(world,person)
     %reentry
     world(y,x).person = person;
     person.place = world(y,x);
+    
 end
