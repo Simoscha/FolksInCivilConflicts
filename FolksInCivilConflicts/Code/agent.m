@@ -68,6 +68,14 @@ classdef agent < handle
                 obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.injury/50))*(obj.place.pInjury-obj.pIbefore)*(obj.support));
             end
             
+            if(obj.place.pArrest == 0)
+                obj.satisfaction = obj.satisfaction + rand(1)*0.05;
+            end
+            
+            if(obj.place.pInjury == 0)
+                obj.satisfaction = obj.satisfaction + rand(1)*0.05;
+            end
+            
             if(obj.satisfaction>1)
                 obj.satisfaction=1;
             end
@@ -84,17 +92,17 @@ classdef agent < handle
         function newRisk(obj)
              %updates the Risk against the Police
             if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0) %would result in dividing by zero (is most likely triggered by pArrest=0 (for example if there are no neighbours present)
-                obj.riskP=1;
+                obj.riskP=(1-obj.support);
             else
 
-                obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);  
+                obj.riskP=(1-obj.support)*obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);  
             end
             
             %updates the Risk against the Mafia
             if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) %would result in dividing by zero (most likely because there are no mafia-members so pInjury=0
-                obj.riskM=1;
+                obj.riskM=obj.support;
             else
-                obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
+                obj.riskM=obj.support*obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
             end
             
             % For Safety: The Risks have to be between 0 and 1: if they
