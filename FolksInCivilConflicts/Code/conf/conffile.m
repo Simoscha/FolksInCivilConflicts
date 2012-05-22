@@ -39,8 +39,8 @@ n_worldHeight = [15];
 n_worldWidth = [15];
 n_agents = [50];       % number of agents
 n_vision = [1];
-n_jailtime = [2];
-n_injury = [2];
+n_jailtime = [10];
+n_injury = [10];
 
 param_agents = [50:5:50];
 param_worldHeight = [15:1:15];

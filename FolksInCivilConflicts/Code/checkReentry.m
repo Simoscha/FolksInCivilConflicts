@@ -7,7 +7,7 @@ function [] = checkReentry(init,world)
       prison(index).jailtime = prison(index).jailtime - 1;
       if(prison(index).jailtime <= 0)
          %set satisfaction back
-         prison(index).person.satisfaction=prison(index).person.satisfaction*(prison(index).person.place.jailtime/2);
+         prison(index).person.satisfaction=prison(index).person.satisfaction*(init.model.n_jailtime/2);
          reentry(world,prison(index).person);
          prison(index) = [];
          prisonlength = prisonlength - 1;
@@ -22,10 +22,10 @@ function [] = checkReentry(init,world)
    hospitallength = length(hospital);
    index = 2;
    while(index <= hospitallength)
-      hospital(index).injury = hospital(index).jailtime - 1;
+      hospital(index).injury = hospital(index).injury - 1;
       if(hospital(index).injury <= 0)
           %set satisfaction back
-          hospital(index).person.satisfaction=hospital(index).person.satisfaction*(hospital(index).person.place.injury/2);
+          hospital(index).person.satisfaction=hospital(index).person.satisfaction*(init.model.n_injury/2);
           reentry(world,hospital(index).person);
           hospital(index)= [];
           hospitallength = hospitallength - 1;

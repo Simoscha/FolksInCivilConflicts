@@ -65,7 +65,6 @@ for indexPopulation = 1:length(init.model.param_agents)
                 hospitalArray(index,1:length(hospital)) = copy(hospital);
                 prisonLengthArray(index) = length(prison);
                 hospitalLengthArray(index) = length(hospital);
-                hm = length(hospital)
                 [agents,amount] = findAllAgents(world);
                 statistics(index,:) = getStatistics(agents,amount);
                 moveAll(world);

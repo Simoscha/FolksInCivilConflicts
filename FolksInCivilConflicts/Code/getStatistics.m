@@ -9,7 +9,6 @@ function statistics = getStatistics(agents,amount)
         %agents(index)
         averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
     end
-    averageSatisfaction
     statistics(1) = averageSatisfaction/amount;
     
     averageSupport = 0;
