@@ -13,51 +13,39 @@ function [ person,world ] = movePerson( person,world)
         
         %the person can just stay put and not move at all: "moves to his
         %own field"
-        neighbours(counter+1)=person.place;
-        counter=counter+1;
         
-        index=randi(counter,1);     %creates a random integer between 1 and the number of free neighbours
-        
-        if(index~=counter)              %if index==counter: person doesn't move at all
-%             x=neighbours(index).x;      %gets the column of the location in the world
-%             y=neighbours(index).y;      %gets line of the location in the world
-%             person.moveTo(world(y,x));  %moves the agent to his new location and sets all the member variables
+        if(person.support>0.75 || person.support<0.25)
             
-            if(person.support>0.75)
-                %police move random
+            neighbours(counter+1)=person.place;
+            counter=counter+1;
+      
+            index=randi(counter,1);     %creates a random integer between 1 and the number of free neighbours
+            if(index~=counter)              %if index==counter: person doesn't move at all
                 x=neighbours(index).x;      %gets the column of the location in the world
                 y=neighbours(index).y;      %gets line of the location in the world
-                person.moveTo(world(y,x));
-            elseif(person.support<0.25)
-                %mafia stay in mafia place
-                maxInf = -1;
-                indexMax = 1;
-                for index = 1:counter
-                    if(neighbours(index).infMafia > maxInf)
-                       maxInf = neighbours(index).infMafia;
-                       indexMax = index;
-                    end
-                end
-                x=neighbours(indexMax).x;  
-                y=neighbours(indexMax).y;
-                person.moveTo(world(y,x));
-            else
-                %normal people move around police
-                maxInf = -1;
-                indexMax = 1;
-                for index = 1:counter
-                    if(neighbours(index).infPolice > maxInf)
-                       maxInf = neighbours(index).infPolice;
-                       indexMax = index;
-                    end
-                end
-                x=neighbours(indexMax).x;  
-                y=neighbours(indexMax).y;
-                person.moveTo(world(y,x));
+                person.moveTo(world(y,x));  %moves the agent to his new location and sets all the member variables
             end
+        else    %normal population
+                %normal people try to avoid both police and mafia: go where
+                %their influence is as small as possible. For people who
+                %are rather mafia supportive the police influence is worse
+                %than the mafia influence and vice versa
+                minInf = 1000;
+                indexMin = 1;
+                for index = 1:counter
+                    if((1-person.support)*neighbours(index).infPolice + person.support*neighbours(index).infMafia < minInf)
+                       minInf = (1-person.support)*neighbours(index).infPolice + person.support*neighbours(index).infMafia;
+                       indexMin = index;
+                    end
+                end
+                x=neighbours(indexMin).x;  
+                y=neighbours(indexMin).y;
+                person.moveTo(world(y,x));
         end
-    end
         
+        
+    end
+            
     if(person.support>0.75)     %If the agent is an active policeman
         [neighboursA,counterA]=getNeighbours(person, world,1); %gets the occupied neighbouring fields
         

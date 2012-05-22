@@ -61,7 +61,12 @@ classdef agent < handle
         % Changes the satisfaction
         function newSat(obj)   
             
-            obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.jailtime/20))*(obj.place.pArrest-obj.pAbefore)*(1-obj.support)+exp(-1/(obj.place.injury/20))*(obj.place.pInjury-obj.pIbefore)*(obj.support));
+            if(obj.place.jailtime ~= 0)
+                obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.jailtime/50))*(obj.place.pArrest-obj.pAbefore)*(1-obj.support));
+            end
+            if(obj.place.injury ~= 0)
+                obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.injury/50))*(obj.place.pInjury-obj.pIbefore)*(obj.support));
+            end
             
             if(obj.satisfaction>1)
                 obj.satisfaction=1;
@@ -79,7 +84,7 @@ classdef agent < handle
         function newRisk(obj)
              %updates the Risk against the Police
             if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0) %would result in dividing by zero (is most likely triggered by pArrest=0 (for example if there are no neighbours present)
-                obj.riskP=0;
+                obj.riskP=1;
             else
 
                 obj.riskP=obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);  
@@ -87,7 +92,7 @@ classdef agent < handle
             
             %updates the Risk against the Mafia
             if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) %would result in dividing by zero (most likely because there are no mafia-members so pInjury=0
-                obj.riskM=0;
+                obj.riskM=1;
             else
                 obj.riskM=obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
             end
