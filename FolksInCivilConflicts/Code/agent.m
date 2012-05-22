@@ -69,11 +69,11 @@ classdef agent < handle
             end
             
             if(obj.place.pArrest == 0)
-                obj.satisfaction = obj.satisfaction + rand(1)*0.05;
+                obj.satisfaction = obj.satisfaction + rand(1)*0.005*(exp(-obj.satisfaction)-exp(-0.8));
             end
             
             if(obj.place.pInjury == 0)
-                obj.satisfaction = obj.satisfaction + rand(1)*0.05;
+                obj.satisfaction = obj.satisfaction + rand(1)*0.005*(exp(-obj.satisfaction)-exp(-0.8));
             end
             
             if(obj.satisfaction>1)

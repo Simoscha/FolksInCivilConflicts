@@ -38,9 +38,9 @@ n_lifetime = 50; %rounds to simulate
 n_worldHeight = [15];
 n_worldWidth = [15];
 n_agents = [50];       % number of agents
-n_vision = [2];
-n_jailtime = [10];
-n_injury = [10];
+n_vision = [1];
+n_jailtime = [20];
+n_injury = [20];
 
 param_agents = [50:5:50];
 param_worldHeight = [15:1:15];
