@@ -2,6 +2,8 @@ function [ person,world ] = movePerson( person,world)
 %MOVEPERSON Summary of this function goes here
 %   Detailed explanation goes here
 % Moves a Person onto a field in his/her vision
+global policeThreshold
+global mafiaThreshold
        
 
     [neighbours,counter]=getNeighbours(person, world,0); %gets the empty, neighbouring fields and there number
@@ -13,8 +15,7 @@ function [ person,world ] = movePerson( person,world)
         
         %the person can just stay put and not move at all: "moves to his
         %own field"
-        
-        if(person.support>0.75 || person.support<0.25)
+        if((person.support > policeThreshold) || (person.support < mafiaThreshold))
             
             neighbours(counter+1)=person.place;
             counter=counter+1;
@@ -46,7 +47,7 @@ function [ person,world ] = movePerson( person,world)
         
     end
             
-    if(person.support>0.75)     %If the agent is an active policeman
+    if(person.support>policeThreshold)     %If the agent is an active policeman
         [neighboursA,counterA]=getNeighbours(person, world,1); %gets the occupied neighbouring fields
         
         if(counterA==0)      %can only arrest if there are people
@@ -64,7 +65,7 @@ function [ person,world ] = movePerson( person,world)
         end
     end
     
-    if(person.support<0.25)     %If the agent is an active mafia supporter
+    if(person.support<mafiaThreshold)     %If the agent is an active mafia supporter
         [neighboursI,counterI]=getNeighbours(person, world,1); %gets the occupied neighbouring fields
         
         if(counterI==0)      %can only injure if there are people

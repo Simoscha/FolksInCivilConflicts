@@ -90,6 +90,8 @@ classdef location < handle
         
         %defines the new influences of Mafia, Police and Total
         function newInfluences(obj,world)
+            global policeThreshold
+            global mafiaThreshold
             % the new influences don't depend on the old ones so first set
             % them all to zero
             obj.infMafia=0;     
@@ -109,17 +111,17 @@ classdef location < handle
             %adds up all the influences
             for k=1:amount
                 obj.infTot=obj.infTot+neighbours(k).person.influence;
-                if(neighbours(k).person.support>0.75)
+                if(neighbours(k).person.support>policeThreshold)
                     obj.infPolice=obj.infPolice+neighbours(k).person.influence;
                 end
-                if(neighbours(k).person.support<0.25)
+                if(neighbours(k).person.support<mafiaThreshold)
                     obj.infMafia=obj.infMafia+neighbours(k).person.influence;
                 end
             end
-            if(obj.person.support>0.75)
+            if(obj.person.support>policeThreshold)
                 obj.infPolice=obj.infPolice + obj.person.influence;
             end
-            if(obj.person.support<0.25)
+            if(obj.person.support<mafiaThreshold)
                 obj.infMafia=obj.infMafia+obj.person.influence;
             end
         end

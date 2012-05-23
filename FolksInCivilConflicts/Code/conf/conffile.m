@@ -35,12 +35,14 @@ globals = struct('dumpDir', dumpDir, ...
 % format to perform parameter sweeping
 
 n_lifetime = 50; %rounds to simulate
-n_worldHeight = [15];
-n_worldWidth = [15];
-n_agents = [50];       % number of agents
+n_worldHeight = [10];
+n_worldWidth = [10];
+n_agents = [30];       % number of agents
 n_vision = [1];
-n_jailtime = [0];
-n_injury = [0];
+n_jailtime = [5];
+n_injury = [5];
+n_policeThreshold = [0.5];
+n_mafiaThreshold = [0.25];
 
 param_agents = [50:5:50];
 param_worldHeight = [15:1:15];
@@ -48,6 +50,9 @@ param_worldWidth = [15:1:15];
 
 param_jailtime = [5:1:5];
 param_injury = [10:1:10];
+
+param_policeThreshold = [0.5:0.05:1];
+param_mafiaThreshold = [0:0.05:0.5];
 
 
 model = struct('n_lifetime' , n_lifetime, ...
@@ -57,6 +62,8 @@ model = struct('n_lifetime' , n_lifetime, ...
                 'n_vision', n_vision, ...
                 'n_jailtime', n_jailtime, ...
                 'n_injury', n_injury, ...
+                'n_policeThreshold', n_policeThreshold, ...
+                'n_mafiaThreshold', n_mafiaThreshold, ...
                 'param_agents', param_agents,...
                 'param_worldHeight', param_worldHeight, ...
                 'param_worldWidth', param_worldWidth, ...

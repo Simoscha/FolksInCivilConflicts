@@ -1,5 +1,4 @@
 %% Do the simulation Population against Worldsize
-
 % Clear workspace
 close all
 clear all
@@ -25,6 +24,11 @@ global hospital;
 hospital=location;
 hospital(1).x=-1;
 hospital(1).y=1;
+
+global policeThreshold
+policeThreshold = init.model.n_policeThreshold;
+global mafiaThreshold
+mafiaThreshold = init.model.n_mafiaThreshold;
 
 for indexPopulation = 1:length(init.model.param_agents)
     init.model.n_agents = init.model.param_agents(indexPopulation);
@@ -65,7 +69,6 @@ for indexPopulation = 1:length(init.model.param_agents)
                 hospitalArray(index,1:length(hospital)) = copy(hospital);
                 prisonLengthArray(index) = length(prison);
                 hospitalLengthArray(index) = length(hospital);
-                lengt
                 [agents,amount] = findAllAgents(world);
                 statistics(index,:) = getStatistics(agents,amount);
                 moveAll(world);
@@ -125,6 +128,12 @@ global hospital;
 hospital=location;
 hospital(1).x=-1;
 hospital(1).y=1;
+
+global policeThreshold
+policeTrheshold = init.model.n_policeThreshold;
+global mafiaThreshold
+mafiaThreshold = init.model.n_mafiaThreshold;
+
 for indexJailtime = 1:length(init.model.param_jailtime)
     init.model.n_jailtime = init.model.param_jailtime(indexJailtime);
     for indexInjury = 1:length(init.model.param_injury)
@@ -183,7 +192,107 @@ for indexJailtime = 1:length(init.model.param_jailtime)
     end
 end
 
+%% Do the simulation policeThreshold againt mafiaThreshold
+% Clear workspace
+close all
+clear all
+clc
+% Add other directories to path
+path(path,'conf/');
+%load the configuration file
+conffile
+%or load saved configuration
+%load('AlphaSim');
 
+%initializes the hospital and prison globally and initializes them as
+%locations (otherwise it wouldn't work)
+%Beware: Because they are already initialized to a location here, the
+%first array-element of both hospital and prison is useless: therefore
+%the two arrays will always have one element more then there are people
+%in hospital or prison
+global prison;
+prison=location;
+prison(1).x=-2;
+prison(1).y=1;
+global hospital;
+hospital=location;
+hospital(1).x=-1;
+hospital(1).y=1;
+
+global policeThreshold
+policeThreshold = init.model.n_policeThreshold;
+global mafiaThreshold
+mafiaThreshold = init.model.n_mafiaThreshold;
+
+for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
+    policeThreshold = init.model.param_policeThreshold(indexPopulation);
+    for indexMafiaThreshold = 1:length(init.model.param_mafiaThreshold)
+        mafiaThreshold = init.model.param_mafiaThreshold(indexWorldsize);
+        
+        
+        world = createWorld(init);
+        [agent,before]=findAgents(world);
+        if(init.globals.DEBUG)
+            disp(before)
+        end
+
+        
+
+        %preallocate an array to save to world after each round
+        worldArray = repmat(world,[(init.model.n_lifetime + 1) init.globals.RUNS]);   
+        prisonArray = repmat(location,[(init.model.n_lifetime + 1) init.model.n_agents]);
+        hospitalArray = repmat(location,[(init.model.n_lifetime + 1) init.model.n_agents]);
+        prisonLengthArray = zeros(init.model.n_lifetime + 1,1);
+        hospitalLengthArray = zeros(init.model.n_lifetime + 1,1);
+        % Repeat the same simulation RUNS times
+        for rCount=1:init.globals.RUNS    
+
+            fprintf('\n%s\n',init.name);
+            fprintf('Starting Run: %d/%d of Simulation.\n', ...
+                    rCount,init.globals.RUNS)
+            fprintf('------------------------------------\n');
+
+
+            %preallocate a statistics array
+            statistics = zeros(init.model.n_lifetime,4);
+            for index = 1:init.model.n_lifetime;
+                %save the current world
+                worldArray(1 + ((index-1)*init.model.n_worldHeight):index*init.model.n_worldHeight,(1 + (rCount-1)*init.model.n_worldWidth):rCount*init.model.n_worldWidth) = copy(world);%make a deep copy
+                prisonArray(index,1:length(prison)) = copy(prison);
+                hospitalArray(index,1:length(hospital)) = copy(hospital);
+                prisonLengthArray(index) = length(prison);
+                hospitalLengthArray(index) = length(hospital);
+                [agents,amount] = findAllAgents(world);
+                statistics(index,:) = getStatistics(agents,amount);
+                moveAll(world);
+                updateAll(world);
+                checkReentry(init,world);
+            end
+
+            index = index + 1;
+            %save the last world
+            worldArray(1 + ((index-1)*init.model.n_worldHeight):index*init.model.n_worldHeight,(1 + (rCount-1)*init.model.n_worldWidth):rCount*init.model.n_worldWidth) = world;
+            prisonArray(index,1:length(prison)) = copy(prison);
+            hospitalArray(index,1:length(hospital)) = copy(hospital);
+
+
+            [agents,amount] = findAgents(world);
+            if(init.globals.DEBUG)
+                disp(amount)
+            end
+
+            fprintf('\n\n');
+
+
+        end
+
+        %save worldarray to disk
+        save(strcat('data/world_',int2str(init.model.n_agents),'_',int2str(init.model.n_worldHeight),'x',int2str(init.model.n_worldWidth) ,'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
+
+        fprintf('Finished Run:');
+        fprintf('------------------------------------\n');
+    end
+end
 
 
 %% show World
@@ -229,6 +338,9 @@ plotStatistics(statistics,(length(statistics(:,1))));
 close all
 clear all
 clc
+
+global prison
+global hospital
 % Add other directories to path
 path(path,'conf/');
 %load the configuration file
@@ -242,6 +354,9 @@ analyseWorldsizePopulation(init);
 close all
 clear all
 clc
+
+global prison
+global hospital
 % Add other directories to path
 path(path,'conf/');
 %load the configuration file

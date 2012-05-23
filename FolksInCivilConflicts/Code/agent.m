@@ -131,7 +131,7 @@ classdef agent < handle
         function newSup(obj)
             
             %updates the Support-Value
-            obj.support=obj.support - obj.riskP + obj.riskM;
+            obj.support=obj.support - exp(-1/2*(1-obj.support))*obj.riskP + exp(-1/2*obj.support)*obj.riskM;
             
             %If the support would be leave the defined area: just set it to
             %the boundary-value
