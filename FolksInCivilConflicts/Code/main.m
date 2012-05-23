@@ -306,7 +306,7 @@ path(path,'conf/');
 conffile
 %load saved world data
 %load('worldAlphaSim');
-load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1))));
+load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1)),'_1'));
 rCount = 1;
 pause on
 for index = 1:(length(worldArray(:,1))/(init.model.param_worldHeight(1)));
@@ -327,7 +327,7 @@ path(path,'conf/');
 %load the configuration file
 conffile
 %load saved world data
-load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1))));
+load(strcat('data/world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1)),'_1'));
 %load('data/world_20_10x10');
 plotStatistics(statistics,(length(statistics(:,1))));
 
