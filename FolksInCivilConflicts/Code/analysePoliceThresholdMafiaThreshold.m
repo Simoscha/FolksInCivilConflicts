@@ -7,7 +7,7 @@ function [] = analysePoliceThresholdMafiaThreshold(init)
        for indexMafiaThreshold = 1:length(init.model.param_mafiaThreshold)
            for rCount=1:init.globals.RUNS
                mafiaThreshold = init.model.param_mafiaThreshold(indexMafiaThreshold);
-                load(strcat('data/world_',num2str(policeThreshold),'_',num2str(mafiaThreshold),'_',int2str(rCount),'.mat'));
+                load(strcat('data/', init.globals.NAME , 'world_PoliceMafiaThreshold_',num2str(policeThreshold),'_',num2str(mafiaThreshold),'_',int2str(rCount),'.mat'));
                 %get the last world
                 world = worldArray(1 + ((init.model.n_lifetime-1)*init.model.n_worldHeight):init.model.n_lifetime*init.model.n_worldHeight,(1 + (1-1)*init.model.n_worldWidth):1*init.model.n_worldWidth);
                 prison = prisonArray(init.model.n_lifetime+1,1:prisonLengthArray(init.model.n_lifetime+1));

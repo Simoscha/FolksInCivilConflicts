@@ -6,7 +6,7 @@ function [] = analyseJailtimeInjury(init)
     for indexJailtime = 1:length(init.model.param_jailtime)
        for indexInjury = 1:length(init.model.param_injury)
             for rCount=1:init.globals.RUNS
-                load(strcat('data/world_',int2str(init.model.param_jailtime(indexJailtime)),'_',int2str(init.model.param_injury(indexInjury)),'_',int2str(rCount)));
+                load(strcat('data/', init.globals.NAME , 'world_JailtimeInjury_',int2str(init.model.param_jailtime(indexJailtime)),'_',int2str(init.model.param_injury(indexInjury)),'_',int2str(rCount)));
                 %get the last world
                 world = worldArray(1 + ((init.model.n_lifetime-1)*init.model.n_worldHeight):init.model.n_lifetime*init.model.n_worldHeight,(1 + (1-1)*init.model.n_worldWidth):1*init.model.n_worldWidth);
                 prison = prisonArray(init.model.n_lifetime+1,1:prisonLengthArray(init.model.n_lifetime+1));

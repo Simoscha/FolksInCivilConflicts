@@ -16,6 +16,7 @@ DUMP = 1;               % Save the results in an external file
 
 COMPUTATION = 0;        % In case you have different engine (e.g. cluster, 
                         % multicore processor, or single core processor)
+NAME = 'Christian';
                         
 RUNS = 20;              % Number of simulation runs with same param set
 
@@ -23,7 +24,8 @@ globals = struct('dumpDir', dumpDir, ...
                   'RUNS', RUNS, ...
                   'VIDEO', VIDEO, ...
                   'DEBUG', DEBUG, ...
-                  'DUMP', DUMP ...
+                  'DUMP', DUMP, ...
+                  'NAME', NAME ...
                   );
 
 %%%%%%%%%%%%%
@@ -41,7 +43,7 @@ n_agents = [30];       % number of agents
 n_vision = [1];
 n_jailtime = [5];
 n_injury = [5];
-n_policeThreshold = [0.5];
+n_policeThreshold = [0.75];
 n_mafiaThreshold = [0.25];
 
 param_agents = [10:5:60];

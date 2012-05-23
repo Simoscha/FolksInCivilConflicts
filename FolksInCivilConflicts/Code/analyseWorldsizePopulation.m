@@ -5,7 +5,7 @@ function [] = analyseWorldsizePopulation(init)
     for indexPopulation = 1:length(init.model.param_agents)
        for indexWorldsize = 1:length(init.model.param_worldHeight)
            for rCount=1:init.globals.RUNS
-                load(strcat('data/world_',int2str(init.model.param_agents(indexPopulation)),'_',int2str(init.model.param_worldHeight(indexWorldsize)),'x',int2str(init.model.param_worldWidth(indexWorldsize))));
+                load(strcat('data/', init.globals.NAME , 'world_PopulationSize_',int2str(init.model.param_agents(indexPopulation)),'_',int2str(init.model.param_worldHeight(indexWorldsize)),'x',int2str(init.model.param_worldWidth(indexWorldsize)),'_',int2str(rCount)));
                 %get the last world
                 world = worldArray(1 + ((init.model.n_lifetime-1)*init.model.param_worldHeight(indexWorldsize)):init.model.n_lifetime*init.model.param_worldHeight(indexWorldsize),(1 + (1-1)*init.model.param_worldWidth(indexWorldsize)):1*init.model.param_worldWidth(indexWorldsize));
                 prison = prisonArray(init.model.n_lifetime+1,1:prisonLengthArray(init.model.n_lifetime+1));

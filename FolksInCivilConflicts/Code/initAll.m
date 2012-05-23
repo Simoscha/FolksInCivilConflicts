@@ -5,8 +5,8 @@ function [] = initAll( world,vision,jailtime,injury )
 % all the agents with their NON-CONSTANT properties (the constant ones have
 % to be defined already)
 
-    height = length(world(:,1))
-    width = length(world(1,:))
+    height = length(world(:,1));
+    width = length(world(1,:));
     
     %initialize all Locations and agents
     for k1=1:width

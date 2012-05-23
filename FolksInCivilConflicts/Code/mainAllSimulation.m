@@ -1,4 +1,4 @@
-%% Do the simulation Population against Worldsize
+% Do the simulation Population against Worldsize
 % Clear workspace
 close all
 clear all
@@ -101,7 +101,7 @@ for indexPopulation = 1:length(init.model.param_agents)
     end
 end
 
-%% Do the simulation Jailtime against Injury
+% Do the simulation Jailtime against Injury
 
 % Clear workspace
 close all
@@ -200,7 +200,7 @@ for indexJailtime = 1:length(init.model.param_jailtime)
     end
 end
 
-%% Do the simulation policeThreshold againt mafiaThreshold
+% Do the simulation policeThreshold againt mafiaThreshold
 % Clear workspace
 close all
 clear all
@@ -235,7 +235,7 @@ mafiaThreshold = init.model.n_mafiaThreshold;
 for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
     policeThreshold = init.model.param_policeThreshold(indexPoliceThreshold);
     for indexMafiaThreshold = 1:length(init.model.param_mafiaThreshold)
-        fprintf('Jailtime vs Injury %d/%d.\n',(indexPoliceThreshold-1)*length(init.model.param_mafiaThreshold)+indexMafiaThreshold,length(init.model.param_policeThreshold)*length(init.model.param_mafiaThreshold));
+        fprintf('PoliceThreshold vs MafiaThreshold %d/%d.\n',(indexPoliceThreshold-1)*length(init.model.param_mafiaThreshold)+indexMafiaThreshold,length(init.model.param_policeThreshold)*length(init.model.param_mafiaThreshold));
         mafiaThreshold = init.model.param_mafiaThreshold(indexMafiaThreshold);
         
         
@@ -291,7 +291,7 @@ for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
 
             fprintf('\n\n');
             %save worldarray to disk
-            save(strcat('data/', init.globals.NAME ,'world_PoliceMafiaThreshold_',num2str(policeThreshold),'_',num2str(mafiaThreshold), '_', int2str(rCount),'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
+            save(strcat('data/', init.globals.NAME , 'world_PoliceMafiaThreshold_',num2str(policeThreshold),'_',num2str(mafiaThreshold), '_', int2str(rCount),'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
             fprintf('Finished Run:');
             fprintf('------------------------------------\n');
 
@@ -302,90 +302,4 @@ for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
     end
 end
 
-
-%% show World
-
-% Clear workspace
-close all
-clear all
-
-% Add other directories to path
-path(path,'conf/');
-%load the configuration file
-conffile
-%load saved world data
-%load('worldAlphaSim');
-load(strcat('data/'+ init.globals.NAME + 'world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1)),'_1'));
-rCount = 1;
-pause on
-for index = 1:(length(worldArray(:,1))/(init.model.param_worldHeight(1)));
-    index
-    world = worldArray(1 + ((index-1)*init.model.param_worldHeight(1)):index*init.model.param_worldHeight(1),(1 + (rCount-1)*init.model.param_worldWidth(1)):rCount*init.model.param_worldWidth(1));
-    displayWorld(world);
-    pause(0.1)
-end
-
-%% show statistic
-
-% Clear workspace
-close all
-clear all
-clc
-% Add other directories to path
-path(path,'conf/');
-%load the configuration file
-conffile
-%load saved world data
-load(strcat('data/'+ init.globals.NAME + 'world_',int2str(init.model.param_agents(1)),'_',int2str(init.model.param_worldHeight(1)),'x',int2str(init.model.param_worldWidth(1)),'_1'));
-%load('data/world_20_10x10');
-plotStatistics(statistics,(length(statistics(:,1))));
-
-%% world size & population -> satisfaction
-
-% Clear workspace
-close all
-clear all
-clc
-
-global prison
-global hospital
-% Add other directories to path
-path(path,'conf/');
-%load the configuration file
-conffile
-%load saved world data
-analyseWorldsizePopulation(init);
-
-%% jailtime & injury -> satisfaction
-
-% Clear workspace
-close all
-clear all
-clc
-
-global prison
-global hospital
-% Add other directories to path
-path(path,'conf/');
-%load the configuration file
-conffile
-%load saved world data
-analyseJailtimeInjury(init);
-
-%% policeThreshold & mafiaThreshold -> satisfaction
-
-% Clear workspace
-close all
-clear all
-clc
-
-global prison
-global hospital
-% Add other directories to path
-path(path,'conf/');
-%load the configuration file
-conffile
-%load saved world data
-analysePoliceThresholdMafiaThreshold(init);
-
-
+fprintf('done Simulation:');
