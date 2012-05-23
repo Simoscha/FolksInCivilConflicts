@@ -5,21 +5,24 @@ function [] = analysePoliceThresholdMafiaThreshold(init)
     for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
         policeThreshold = init.model.param_policeThreshold(indexPoliceThreshold);
        for indexMafiaThreshold = 1:length(init.model.param_mafiaThreshold)
-           mafiaThreshold = init.model.param_mafiaThreshold(indexMafiaThreshold);
-            load(strcat('data/world_',num2str(policeThreshold),'_',num2str(mafiaThreshold),'.mat'));
-            %get the last world
-            world = worldArray(1 + ((init.model.n_lifetime-1)*init.model.n_worldHeight):init.model.n_lifetime*init.model.n_worldHeight,(1 + (1-1)*init.model.n_worldWidth):1*init.model.n_worldWidth);
-            prison = prisonArray(init.model.n_lifetime+1,1:prisonLengthArray(init.model.n_lifetime+1));
-            hospital = hospitalArray(init.model.n_lifetime+1,1:hospitalLengthArray(init.model.n_lifetime+1));
-            [agents,amount] = findAllAgents(world);
-            
-            averageSatisfaction = sum([agents.satisfaction]);
-%             averageSatisfaction = 0;
-%             for index = 1:amount-1
-%                 averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
-%             end
-            averageSatisfaction = averageSatisfaction/amount;
-            averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold) = averageSatisfaction;
+           for rCount=1:init.globals.RUNS
+               mafiaThreshold = init.model.param_mafiaThreshold(indexMafiaThreshold);
+                load(strcat('data/world_',num2str(policeThreshold),'_',num2str(mafiaThreshold),'_',int2str(rCount),'.mat'));
+                %get the last world
+                world = worldArray(1 + ((init.model.n_lifetime-1)*init.model.n_worldHeight):init.model.n_lifetime*init.model.n_worldHeight,(1 + (1-1)*init.model.n_worldWidth):1*init.model.n_worldWidth);
+                prison = prisonArray(init.model.n_lifetime+1,1:prisonLengthArray(init.model.n_lifetime+1));
+                hospital = hospitalArray(init.model.n_lifetime+1,1:hospitalLengthArray(init.model.n_lifetime+1));
+                [agents,amount] = findAllAgents(world);
+
+                averageSatisfaction = sum([agents.satisfaction]);
+    %             averageSatisfaction = 0;
+    %             for index = 1:amount-1
+    %                 averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
+    %             end
+                averageSatisfaction = averageSatisfaction/amount;
+                averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold) = averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold) + averageSatisfaction;
+            end
+            averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold) = averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold)/rCount;
              
        end
     end

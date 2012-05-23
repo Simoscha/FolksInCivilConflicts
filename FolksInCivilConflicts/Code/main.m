@@ -89,15 +89,16 @@ for indexPopulation = 1:length(init.model.param_agents)
             end
 
             fprintf('\n\n');
+            %save worldarray to disk
+            save(strcat('data/world_',int2str(init.model.n_agents),'_',int2str(init.model.n_worldHeight),'x',int2str(init.model.n_worldWidth), '_', int2str(rCount) ,'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
 
+            
 
         end
-
-        %save worldarray to disk
-        save(strcat('data/world_',int2str(init.model.n_agents),'_',int2str(init.model.n_worldHeight),'x',int2str(init.model.n_worldWidth) ,'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
-
+        
         fprintf('Finished Run:');
         fprintf('------------------------------------\n');
+        
     end
 end
 
@@ -180,12 +181,10 @@ for indexJailtime = 1:length(init.model.param_jailtime)
             end
 
             fprintf('\n\n');
+            %save worldarray to disk
+            save(strcat('data/world_',int2str(init.model.n_jailtime),'_',int2str(init.model.n_injury), '_',  int2str(rCount),'.mat'),'worldArray','statistics');
 
-
-        end
-
-        %save worldarray to disk
-        save(strcat('data/world_',int2str(init.model.n_jailtime),'_',int2str(init.model.n_injury),'.mat'),'worldArray','statistics');
+        end        
 
         fprintf('Finished Run:');
         fprintf('------------------------------------\n');
@@ -282,13 +281,13 @@ for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
             end
 
             fprintf('\n\n');
+            %save worldarray to disk
+            save(strcat('data/world_',num2str(policeThreshold),'_',num2str(mafiaThreshold), '_', int2str(rCount),'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
 
 
         end
 
-        %save worldarray to disk
-        save(strcat('data/world_',num2str(policeThreshold),'_',num2str(mafiaThreshold),'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
-
+        
         fprintf('Finished Run:');
         fprintf('------------------------------------\n');
     end

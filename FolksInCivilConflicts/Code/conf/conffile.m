@@ -17,7 +17,7 @@ DUMP = 1;               % Save the results in an external file
 COMPUTATION = 0;        % In case you have different engine (e.g. cluster, 
                         % multicore processor, or single core processor)
                         
-RUNS = 1;              % Number of simulation runs with same param set
+RUNS = 3;              % Number of simulation runs with same param set
 
 globals = struct('dumpDir', dumpDir, ...
                   'RUNS', RUNS, ...

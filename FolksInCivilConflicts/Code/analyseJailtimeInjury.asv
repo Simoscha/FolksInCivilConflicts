@@ -2,11 +2,10 @@ function [] = analyseJailtimeInjury(init)
     global prison
     global hospital
      
-    averageSatisfactionArray = zeros(length(init.model.param_jailtime),length(init.model.param_injury));
     for indexJailtime = 1:length(init.model.param_jailtime)
        for indexInjury = 1:length(init.model.param_injury)
             for rCount=1:init.globals.RUNS
-                load(strcat('data/world_',int2str(init.model.param_jailtime(indexJailtime)),'_',int2str(init.model.param_injury(indexInjury)),'_',int2str(rCount)));
+                load(strcat('data/world_',int2str(init.model.param_jailtime(indexJailtime)),'_',int2str(init.model.param_injury(indexInjury))));
                 %get the last world
                 world = worldArray(1 + ((init.model.n_lifetime-1)*init.model.n_worldHeight):init.model.n_lifetime*init.model.n_worldHeight,(1 + (1-1)*init.model.n_worldWidth):1*init.model.n_worldWidth);
                 prison = prisonArray(init.model.n_lifetime+1,1:prisonLengthArray(init.model.n_lifetime+1));
@@ -19,9 +18,7 @@ function [] = analyseJailtimeInjury(init)
     %                 averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
     %             end
                 averageSatisfaction = averageSatisfaction/amount;
-                averageSatisfactionArray(indexJailtime,indexInjury) = averageSatisfactionArray(indexJailtime,indexInjury) + averageSatisfaction;
-            end
-            averageSatisfactionArray(indexJailtime,indexInjury) = averageSatisfactionArray(indexJailtime,indexInjury)/rCount;
+                averageSatisfactionArray(indexJailtime,indexInjury) = averageSatisfaction;
              
        end
     end
