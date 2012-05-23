@@ -287,7 +287,7 @@ for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
         end
 
         %save worldarray to disk
-        save(strcat('data/world_',int2str(policeThreshold),'_',int2str(mafiaThreshold),'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
+        save(strcat('data/world_',num2str(policeThreshold),'_',num2str(mafiaThreshold),'.mat'),'worldArray','statistics','prisonArray','hospitalArray','prisonLengthArray','hospitalLengthArray');
 
         fprintf('Finished Run:');
         fprintf('------------------------------------\n');

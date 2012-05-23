@@ -11,7 +11,7 @@ version = 1;
 dumpDir = 'dump/';      % or use the routine to generate a unique dir
 
 VIDEO = 0;              % Display real time video
-DEBUG = 1;              % Output more verbose 
+DEBUG = 0;              % Output more verbose 
 DUMP = 1;               % Save the results in an external file
 
 COMPUTATION = 0;        % In case you have different engine (e.g. cluster, 

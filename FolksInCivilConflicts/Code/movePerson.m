@@ -41,7 +41,20 @@ global mafiaThreshold
                 end
                 x=neighbours(indexMin).x;  
                 y=neighbours(indexMin).y;
+                
+                %Insert a random element: sometimes the population just
+                %moves randomly
+                tester=rand;
+                if(tester<0.1)
+                    index=randi(counter,1);     %creates a random integer between 1 and the number of free neighbours
+                    if(index~=counter)              %if index==counter: person doesn't move at all
+                        x=neighbours(index).x;      %gets the column of the location in the world
+                        y=neighbours(index).y;      %gets line of the location in the world
+                    end
+                end
+                
                 person.moveTo(world(y,x));
+                
         end
         
         
