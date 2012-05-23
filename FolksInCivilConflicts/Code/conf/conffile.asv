@@ -44,7 +44,7 @@ n_injury = [5];
 n_policeThreshold = [0.5];
 n_mafiaThreshold = [0.25];
 
-param_agents = [10:5:60];
+param_agents = [10:5:50];
 param_worldHeight = [8:1:18];
 param_worldWidth = [8:1:18];
 
