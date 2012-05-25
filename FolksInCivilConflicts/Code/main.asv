@@ -337,8 +337,7 @@ path(path,'conf/');
 conffile
 %load saved world data, the name should be insert by hand
 %load(strcat('data/', init.globals.NAME , 'world_JailtimeInjury_','1','_','1','_1'));
-%load(strcat('data/','Christianworld_PopulationSize_30_10x10_1'));
-load(strcat('data/Christianworld_JailtimeInjury_10_6_1'));
+load(strcat('data/','Christianworld_PopulationSize_30_10x10_1'));
 worldHeight = 10;
 worldWidth = 10;
 rCount = 1;

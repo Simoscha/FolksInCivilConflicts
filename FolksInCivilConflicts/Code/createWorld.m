@@ -43,7 +43,5 @@ function world = createWorld(init)
     
     if(init.globals.DEBUG)
         disp('initialisiert');
-    end
-
-    
+    end    
 end

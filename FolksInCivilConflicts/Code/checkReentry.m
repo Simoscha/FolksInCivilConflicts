@@ -1,15 +1,19 @@
 function [] = checkReentry(init,world)
+%counts the jailtime or injury value down, until the agent could be
+%released and put back to the world
    global prison;
    global hospital;
+   global k;
    prisonlength = length(prison);
-   index = 2;
+   index = 2; %start at index 2 because the first field is empty
    while(index <= prisonlength)
       prison(index).jailtime = prison(index).jailtime - 1;
       if(prison(index).jailtime <= 0)
          %set satisfaction back
-         prison(index).person.satisfaction=prison(index).person.satisfaction/exp(-init.model.n_jailtime/10);
+         prison(index).person.satisfaction=prison(index).person.satisfaction/ ...
+             exp(-init.model.n_jailtime/k);
          reentry(world,prison(index).person);
-         prison(index) = [];
+         prison(index) = []; %delete the agent from prison
          prisonlength = prisonlength - 1;
          if(init.globals.DEBUG)
              disp('released')
@@ -25,9 +29,10 @@ function [] = checkReentry(init,world)
       hospital(index).injury = hospital(index).injury - 1;
       if(hospital(index).injury <= 0)
           %set satisfaction back
-          hospital(index).person.satisfaction=hospital(index).person.satisfaction/exp(-init.model.n_injury/10);
+          hospital(index).person.satisfaction=hospital(index).person.satisfaction/ ...
+              exp(-init.model.n_injury/k);
           reentry(world,hospital(index).person);
-          hospital(index)= [];
+          hospital(index)= []; %delete agent from hospital
           hospitallength = hospitallength - 1;
           if(init.globals.DEBUG)
              disp('health')

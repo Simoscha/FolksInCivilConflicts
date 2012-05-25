@@ -5,16 +5,12 @@ classdef agent < handle
     % in that location is changed. But if I want to change the "person"
     % Variable to another agent I can just do that with
     % obj.person=agent(a,b,c,d) and the person-reference will just be
-    % redirected to the new agent without changing the old one
-    %  
-    %AGENT Summary of this class goes here
-    %   Detailed explanation goes here
-    % Beschreibt einen Agent     
+    % redirected to the new agent without changing the old one   
     
    
     properties
     
-        number      % Falls man etwas auswerten will, bei dem man die Agents identifizieren muss und bsp. number=0 heisst, kein Agent (für Feld)
+        number      % for identification of the agents, number = 0 is an empty field without an agent
         wealth
         courage     
         influence
@@ -26,8 +22,10 @@ classdef agent < handle
         riskM         % Risk, the agent is ready to assume against Mafia 
         riskP         % Risk, the agent is ready to assume against Police
         
-        pAbefore       %probability of Arrest one iteration step before: better here then in location because the agent is moving and has to take it with him...
-        pIbefore       %probability of Injury one iteration step before (at the beginning =0 so that in the first change the pIbefore is set to 0)
+        pAbefore       %probability of Arrest one iteration step before: better here then in 
+                       %location because the agent is moving and has to take it with him...
+        pIbefore       %probability of Injury one iteration step before (at the beginning =0 
+                       %so that in the first change the pIbefore is set to 0)
           
     
     end
@@ -43,11 +41,11 @@ classdef agent < handle
                 return
             end
             obj.wealth=randomvalue(1);
-            obj.satisfaction=obj.wealth; %wealth ist ja der anfangswert von satisfaction
+            obj.satisfaction=obj.wealth; %wealth is the initial value of the satisfaction
             obj.courage=randomvalue(1);
             obj.influence=randomvalue(1);
             obj.basicSupport=randomvalue(1);
-            obj.support=obj.basicSupport;   %basic support ist ja der anfangswert von support
+            obj.support=obj.basicSupport;   %basic support is the initial value of support
             obj.pAbefore=0;
             obj.pIbefore=0;
         end
@@ -62,10 +60,12 @@ classdef agent < handle
         function newSat(obj)   
             
             if(obj.place.jailtime ~= 0)
-                obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.jailtime/50))*(obj.place.pArrest-obj.pAbefore)*(1-obj.support));
+                obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.jailtime/50))*...
+                    (obj.place.pArrest-obj.pAbefore)*(1-obj.support));
             end
             if(obj.place.injury ~= 0)
-                obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.injury/50))*(obj.place.pInjury-obj.pIbefore)*(obj.support));
+                obj.satisfaction=obj.satisfaction-(exp(-1/(obj.place.injury/50))*...
+                    (obj.place.pInjury-obj.pIbefore)*(obj.support));
             end
             
             if(obj.place.pArrest == 0)
@@ -95,7 +95,9 @@ classdef agent < handle
         % Changes the two risk-values.
         function newRisk(obj)
              %updates the Risk against the Police
-            if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0) %would result in dividing by zero (is most likely triggered by pArrest=0 (for example if there are no neighbours present)
+            if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0) 
+                %would result in dividing by zero (is most likely triggered by pArrest=0 
+                %(for example if there are no neighbours present)
                 obj.riskP=(1-obj.support)*(1-obj.satisfaction)*3;
             else
 
@@ -103,7 +105,9 @@ classdef agent < handle
             end
             
             %updates the Risk against the Mafia
-            if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) %would result in dividing by zero (most likely because there are no mafia-members so pInjury=0
+            if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) 
+                %would result in dividing by zero (most likely because 
+                %there are no mafia-members so pInjury=0
                 obj.riskM=obj.support*(1-obj.satisfaction)*3;
             else
                 obj.riskM=obj.support*obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
@@ -149,7 +153,8 @@ classdef agent < handle
         function toPrison(obj)      
            
            global prison;
-            
+           global k; %constant to calculation a usable satisfaction
+           k = 10; 
            %Create a prison-Cell-location where the agent will be put
            prisonCell=location;
            %initialize it with x=-2, y=position in the prison-array,the
@@ -169,8 +174,9 @@ classdef agent < handle
            obj.place=prisonCell; 
            %attaches the prisonCell to the prison array at its end.
            prison(length(prison)+1)=prisonCell;
-           obj.satisfaction=obj.satisfaction/2;
-           obj.satisfaction=obj.satisfaction*exp(-obj.place.jailtime/10); %being arrested severely lessens the satisfaction obviously: the more so the longer the jailtime is
+           obj.satisfaction=obj.satisfaction/2; %half the satisfaction 
+           %being arrested severely lessens the satisfaction obviously: the more so the longer the jailtime is
+           obj.satisfaction=obj.satisfaction*exp(-obj.place.jailtime/k); 
            
            %{
            output1='Prison'
@@ -183,6 +189,7 @@ classdef agent < handle
         function toHospital(obj)
             
             global hospital;
+            global k;
             
            %create new location with the "hospital-room"
            room=location;
@@ -201,13 +208,9 @@ classdef agent < handle
            %attaches the room to the hospital array
            hospital(length(hospital)+1)=room;
            obj.satisfaction=obj.satisfaction/2;
-           obj.satisfaction=obj.satisfaction*exp(-obj.place.injury/10); %being injured severely lessens the satisfaction obviously: the more so the more severe the injury is
+           %being injured severely lessens the satisfaction obviously: the more so the more severe the injury is
+           obj.satisfaction=obj.satisfaction*exp(-obj.place.injury/k); 
            
-            %{
-           output1='Spital'
-           output2=obj.number
-           output3=length(hospital)
-           %}
         end
         
         %moves an agent to a new location

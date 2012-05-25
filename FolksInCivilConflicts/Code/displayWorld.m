@@ -6,11 +6,13 @@ function [] = displayWorld(world)
        y = floor(index/width)+1;
        x = mod(index,width)+1;
        if(0 == world(y,x).person.number)
+         %plot an empty field
          plot(x,y,'.g');  
          hold on
        else
-          blue = world(y,x).person.basicSupport;
-          red = 1 - world(y,x).person.basicSupport;
+          %plot the agent with a color based on his support
+          blue = world(y,x).person.support;
+          red = 1 - world(y,x).person.support;
           plot(x,y,'-mo',...
             'LineWidth',2,...
             'MarkerEdgeColor','k',...
