@@ -154,7 +154,7 @@ classdef agent < handle
            
            global prison;
            global k; %constant to calculation a usable satisfaction
-           k = 10; 
+           
            %Create a prison-Cell-location where the agent will be put
            prisonCell=location;
            %initialize it with x=-2, y=position in the prison-array,the

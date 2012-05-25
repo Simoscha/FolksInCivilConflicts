@@ -3,6 +3,7 @@ function [ person,world ] = movePerson( person,world)
 % Moves a Person onto a field in his/her vision
 global policeThreshold
 global mafiaThreshold
+global debug
        
 
     [neighbours,counter]=getNeighbours(person, world,0); %gets the empty, neighbouring fields and there number
@@ -75,7 +76,7 @@ global mafiaThreshold
         if(comp<(world(y,x).pArrest))    %if comp<pArrest: agent is arrested: his place is set to 0, 
                                          %the location where he was standing is now empty
             world(y,x).person.toPrison();
-            if(init.globals.DEBUG)
+            if(debug)
              disp('arrested')
           end
         end
@@ -95,7 +96,7 @@ global mafiaThreshold
         if(comp<world(y,x).pInjury)    %if comp<pArrest: agent is arrested: his place is set to 0, 
                                        %the location where he was standing is now empty
             world(y,x).person.toHospital();
-            if(init.globals.DEBUG)
+            if(debug)
              disp('hurt')
           end
         end

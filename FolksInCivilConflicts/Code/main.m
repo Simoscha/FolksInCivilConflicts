@@ -41,6 +41,12 @@ policeThreshold = init.model.n_policeThreshold;
 global mafiaThreshold
 mafiaThreshold = init.model.n_mafiaThreshold;
 
+global k;%constant to calculation a usable satisfaction
+k = 10;
+
+global debug;
+debug = init.globals.DEBUG; %to have access in class
+
 for indexPopulation = 1:length(init.model.param_agents)
     init.model.n_agents = init.model.param_agents(indexPopulation);
     for indexWorldsize = 1:length(init.model.param_worldHeight)
@@ -148,6 +154,12 @@ policeThreshold = init.model.n_policeThreshold;
 global mafiaThreshold
 mafiaThreshold = init.model.n_mafiaThreshold;
 
+global k;
+k = 10;
+
+global debug;
+debug = init.globals.DEBUG; %to have access in class
+
 for indexJailtime = 1:length(init.model.param_jailtime)
     init.model.n_jailtime = init.model.param_jailtime(indexJailtime);
     for indexInjury = 1:length(init.model.param_injury)
@@ -249,6 +261,12 @@ global policeThreshold
 policeThreshold = init.model.n_policeThreshold;
 global mafiaThreshold
 mafiaThreshold = init.model.n_mafiaThreshold;
+
+global k;
+k = 10;
+
+global debug;
+debug = init.globals.DEBUG; %to have access in class
 
 for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
     policeThreshold = init.model.param_policeThreshold(indexPoliceThreshold);
