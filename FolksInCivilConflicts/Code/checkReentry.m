@@ -1,4 +1,5 @@
 function [] = checkReentry(init,world)
+%CHECKREENTRY
 %counts the jailtime or injury value down, until the agent could be
 %released and put back to the world
    global prison;

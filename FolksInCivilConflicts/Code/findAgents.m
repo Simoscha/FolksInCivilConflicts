@@ -1,6 +1,5 @@
 function [ agents,finderCounter ] = findAgents( world )
-%FINDAGENTS Summary of this function goes here
-%   Detailed explanation goes here
+%FINDAGENTS 
 % Gets a world and gives back all the non-empty agents in it
 
 width=length(world(1,:));

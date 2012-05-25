@@ -1,6 +1,5 @@
 function [ agents,amount ] = findAllAgents( world )
-%FINDALLAGENTS Summary of this function goes here
-%   Detailed explanation goes here
+%FINDALLAGENTS 
 % includes the people in prison and hospital
 global hospital
 global prison

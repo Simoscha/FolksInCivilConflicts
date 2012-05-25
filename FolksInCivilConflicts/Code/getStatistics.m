@@ -1,4 +1,5 @@
 function statistics = getStatistics(agents,amount)
+%STATISTICS
     %Returns the average values of one round
     % 1. Satisfaction
     % 2. Support
@@ -6,7 +7,6 @@ function statistics = getStatistics(agents,amount)
     % 4. RiskP
     averageSatisfaction = 0;
     for index = 1:amount
-        %agents(index)
         averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
     end
     statistics(1) = averageSatisfaction/amount;

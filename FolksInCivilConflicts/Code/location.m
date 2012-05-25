@@ -16,7 +16,8 @@ classdef location < handle
        
        jailtime         %how long an arrested agent has to stay in jail
        injury           %how long an injured agent has to stay in the hospital
-       vision           %how far the Agent standing here is able to see/interact (how many grid-cells in eache straight direction)
+       vision           %how far the Agent standing here is able to see/interact 
+                        %(how many grid-cells in eache straight direction)
        person           %the agent standing on this spot
        
        infMafia         %influence of Mafia in the vision-radius
@@ -24,7 +25,8 @@ classdef location < handle
        infTot           %Sum of the influences of all agents within vision
        % The influences have to be defined from the outside as they depend
        % from oder location-objects
-       pArrest        %probability that an Agent is arrested standig here (at the beginning =0 so that in the first change the pAbefore is set to 0)
+       pArrest        %probability that an Agent is arrested standig here (at the beginning =0 
+                      %so that in the first change the pAbefore is set to 0)
         
        pInjury        %probability that an Agent is injured standig here
        

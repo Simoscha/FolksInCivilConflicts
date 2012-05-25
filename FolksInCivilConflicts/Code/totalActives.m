@@ -1,6 +1,5 @@
 function [ policemen,mafiosi ] = totalActives( world )
-%TOTALACTIVES Summary of this function goes here
-%   Detailed explanation goes here
+%TOTALACTIVES 
 global policeThreshold
 global madiaThreshold
     mafiosi=0;

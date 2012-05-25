@@ -1,5 +1,6 @@
 function world = moveAll(world)
-       
+%MOVEALL
+%goes throw all agents and move them
     [agents,finderCounter] = findAgents(world);
     %random numbers, ever number appears only once
     randIndex = randperm(finderCounter);

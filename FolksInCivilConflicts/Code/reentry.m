@@ -1,4 +1,6 @@
 function [] = reentry(world,person)
+%REENTRY
+%set the agent on a free place in the world
     height = length(world(:,1));
     width = length(world(1,:));
     %find empty place to reentry

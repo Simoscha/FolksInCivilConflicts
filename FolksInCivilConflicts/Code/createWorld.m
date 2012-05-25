@@ -1,4 +1,6 @@
 function world = createWorld(init)
+%CREATEWORLD
+%creates a world with the specific size and amount of agents
     height = init.model.n_worldHeight;
     width = init.model.n_worldWidth;
     peopleAmount = init.model.n_agents;

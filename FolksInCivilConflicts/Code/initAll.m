@@ -1,6 +1,5 @@
 function [] = initAll( world,vision,jailtime,injury )
-%INITALL Summary of this function goes here
-%   Detailed explanation goes here
+%INITALL 
 % initializes first all Locations with their initial properties and then
 % all the agents with their NON-CONSTANT properties (the constant ones have
 % to be defined already)

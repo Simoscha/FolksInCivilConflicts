@@ -1,4 +1,6 @@
 function [] = displayWorld(world)
+%DISPLAYWORLD
+%displays the current world
     height = length(world(:,1));
     width = length(world(1,:));
 
@@ -11,8 +13,8 @@ function [] = displayWorld(world)
          hold on
        else
           %plot the agent with a color based on his support
-          blue = world(y,x).person.support;
-          red = 1 - world(y,x).person.support;
+          blue = world(y,x).person.basicSupport;
+          red = 1 - world(y,x).person.basicSupport;
           plot(x,y,'-mo',...
             'LineWidth',2,...
             'MarkerEdgeColor','k',...

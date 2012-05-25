@@ -1,4 +1,5 @@
 function [] = analysePoliceThresholdMafiaThreshold(init)
+%ANALYSEPOLICETHRESHOLDMAFIATHRESHOLD
 %Compares different police and mafie threshold values and makes a 3D plot
     global prison
     global hospital

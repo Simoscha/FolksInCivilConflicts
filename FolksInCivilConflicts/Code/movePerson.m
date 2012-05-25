@@ -1,6 +1,5 @@
 function [ person,world ] = movePerson( person,world)
-%MOVEPERSON Summary of this function goes here
-%   Detailed explanation goes here
+%MOVEPERSON 
 % Moves a Person onto a field in his/her vision
 global policeThreshold
 global mafiaThreshold
@@ -11,7 +10,8 @@ global mafiaThreshold
     empty=agent;                %creates agent
     empty.initAgent(0);         %defines it as empty
     
-    if(counter>0)   %The agent can only move if there are empty fields in his neighbourhood (but even if there arent he still can arrest or hurt people so don't just abbort)
+    if(counter>0)   %The agent can only move if there are empty fields in his neighbourhood 
+                    %(but even if there arent he still can arrest or hurt people so don't just abbort)
         
         %the person can just stay put and not move at all: "moves to his
         %own field"
@@ -72,9 +72,12 @@ global mafiaThreshold
         y=neighboursA(index).y;
         
         comp=rand;                  %random number between 0 and 1
-        if(comp<(world(y,x).pArrest))    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
+        if(comp<(world(y,x).pArrest))    %if comp<pArrest: agent is arrested: his place is set to 0, 
+                                         %the location where he was standing is now empty
             world(y,x).person.toPrison();
-            ausgabe='Verhaftet';
+            if(init.globals.DEBUG)
+             disp('arrested')
+          end
         end
     end
     
@@ -89,9 +92,12 @@ global mafiaThreshold
         x=neighboursI(index).x;  %the field to check
         y=neighboursI(index).y;        
         comp=rand;                  %random number between 0 and 1
-        if(comp<world(y,x).pInjury)    %if comp<pArrest: agent is arrested: his place is set to 0, the location where he was standing is now empty
+        if(comp<world(y,x).pInjury)    %if comp<pArrest: agent is arrested: his place is set to 0, 
+                                       %the location where he was standing is now empty
             world(y,x).person.toHospital();
-            ausgabe='Verletzt';
+            if(init.globals.DEBUG)
+             disp('hurt')
+          end
         end
     end
     

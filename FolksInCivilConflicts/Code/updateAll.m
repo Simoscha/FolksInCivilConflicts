@@ -1,6 +1,5 @@
 function [  ] = updateAll( world )
-%UPDATEALL Summary of this function goes here
-%   Detailed explanation goes here
+%UPDATEALL 
 % updates all the Locations with their new values of Influence and
 % Probabilities (the new agents have already been set by movePerson) and
 % all the agents with their new values of Satisfaction, support and Risks

@@ -1,4 +1,5 @@
 function [] = analyseWorldsizePopulation(init)
+%ANALYSEWORLDSIZEPOPULATION
 %Compares different worldheight, worldwidth and agents values and makes a 3D plot
     global prison
     global hospital

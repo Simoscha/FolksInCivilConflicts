@@ -1,4 +1,5 @@
 function [] = plotStatistics(statistics,cycles)
+%PLOTSTATISTICS
     figure
     plot(1:cycles,statistics);
     set(gca,'FontSize',14);
