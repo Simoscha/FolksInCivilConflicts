@@ -16,10 +16,12 @@ function [] = analyseWorldsizePopulation(init)
                 for index = 1:amount-1
                     averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
                 end
-                averageSatisfaction = averageSatisfaction/amount;
-                averageSatisfactionArray(indexPopulation,indexWorldsize) = averageSatisfactionArray(indexPopulation,indexWorldsize) + averageSatisfaction;
+                %averageSatisfaction = sum([prison.person.satisfaction]) + sum([hospital.person.satisfaction]);
+                
+                averageSatisfaction = averageSatisfaction/init.model.param_agents(indexPopulation);
+                averageSatisfactionArray(indexWorldsize,indexPopulation) = averageSatisfactionArray(indexWorldsize,indexPopulation) + averageSatisfaction;
             end
-            averageSatisfactionArray(indexPopulation,indexWorldsize) = averageSatisfactionArray(indexPopulation,indexWorldsize)/rCount;
+            averageSatisfactionArray(indexWorldsize,indexPopulation) = averageSatisfactionArray(indexWorldsize,indexPopulation)/rCount;
              
        end
     end

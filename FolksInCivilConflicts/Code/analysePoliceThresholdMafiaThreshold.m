@@ -1,7 +1,7 @@
 function [] = analysePoliceThresholdMafiaThreshold(init)
     global prison
     global hospital
-    averageSatisfactionArray = zeros(length(init.model.param_policeThreshold),length(init.model.param_mafiaThreshold));
+    averageSatisfactionArray = zeros(length(init.model.param_mafiaThreshold),length(init.model.param_policeThreshold));
     for indexPoliceThreshold = 1:length(init.model.param_policeThreshold)
         policeThreshold = init.model.param_policeThreshold(indexPoliceThreshold);
        for indexMafiaThreshold = 1:length(init.model.param_mafiaThreshold)
@@ -20,9 +20,9 @@ function [] = analysePoliceThresholdMafiaThreshold(init)
     %                 averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
     %             end
                 averageSatisfaction = averageSatisfaction/amount;
-                averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold) = averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold) + averageSatisfaction;
+                averageSatisfactionArray(indexMafiaThreshold,indexPoliceThreshold) = averageSatisfactionArray(indexMafiaThreshold,indexPoliceThreshold) + averageSatisfaction;
             end
-            averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold) = averageSatisfactionArray(indexPoliceThreshold,indexMafiaThreshold)/rCount;
+            averageSatisfactionArray(indexMafiaThreshold,indexPoliceThreshold) = averageSatisfactionArray(indexMafiaThreshold,indexPoliceThreshold)/rCount;
              
        end
     end

@@ -96,7 +96,7 @@ classdef agent < handle
         function newRisk(obj)
              %updates the Risk against the Police
             if(obj.satisfaction*obj.place.pArrest*obj.place.jailtime==0) %would result in dividing by zero (is most likely triggered by pArrest=0 (for example if there are no neighbours present)
-                obj.riskP=(1-obj.support)*(1-obj.satisfaction);
+                obj.riskP=(1-obj.support)*(1-obj.satisfaction)*3;
             else
 
                 obj.riskP=(1-obj.support)*obj.courage/(obj.satisfaction*obj.place.pArrest*obj.place.jailtime);  
@@ -104,7 +104,7 @@ classdef agent < handle
             
             %updates the Risk against the Mafia
             if(obj.satisfaction*obj.place.pInjury*obj.place.injury==0) %would result in dividing by zero (most likely because there are no mafia-members so pInjury=0
-                obj.riskM=obj.support*(1-obj.satisfaction);
+                obj.riskM=obj.support*(1-obj.satisfaction)*3;
             else
                 obj.riskM=obj.support*obj.courage/(obj.satisfaction*obj.place.pInjury*obj.place.injury);
             end
@@ -169,9 +169,9 @@ classdef agent < handle
            obj.place=prisonCell; 
            %attaches the prisonCell to the prison array at its end.
            prison(length(prison)+1)=prisonCell;
-           if(obj.place.jailtime ~= 0)
-               obj.satisfaction=obj.satisfaction/(obj.place.jailtime/2); %being arrested severely lessens the satisfaction obviously: the more so the longer the jailtime is
-           end 
+           obj.satisfaction=obj.satisfaction/2;
+           obj.satisfaction=obj.satisfaction*exp(-obj.place.jailtime/10); %being arrested severely lessens the satisfaction obviously: the more so the longer the jailtime is
+           
            %{
            output1='Prison'
            output2=obj.number
@@ -200,9 +200,9 @@ classdef agent < handle
            obj.place=room; 
            %attaches the room to the hospital array
            hospital(length(hospital)+1)=room;
-           if(obj.place.injury ~= 0)
-                obj.satisfaction=obj.satisfaction/(obj.place.injury/2); %being injured severely lessens the satisfaction obviously: the more so the more severe the injury is
-           end
+           obj.satisfaction=obj.satisfaction/2;
+           obj.satisfaction=obj.satisfaction*exp(-obj.place.injury/10); %being injured severely lessens the satisfaction obviously: the more so the more severe the injury is
+           
             %{
            output1='Spital'
            output2=obj.number

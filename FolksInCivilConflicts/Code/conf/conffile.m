@@ -18,7 +18,7 @@ COMPUTATION = 0;        % In case you have different engine (e.g. cluster,
                         % multicore processor, or single core processor)
 NAME = 'Christian';
                         
-RUNS = 20;              % Number of simulation runs with same param set
+RUNS = 1;              % Number of simulation runs with same param set
 
 globals = struct('dumpDir', dumpDir, ...
                   'RUNS', RUNS, ...
@@ -36,7 +36,7 @@ globals = struct('dumpDir', dumpDir, ...
 % parameters ranges. This way we prepare already the data in an appropriate
 % format to perform parameter sweeping
 
-n_lifetime = 50; %rounds to simulate
+n_lifetime = 100; %rounds to simulate
 n_worldHeight = [10];
 n_worldWidth = [10];
 n_agents = [30];       % number of agents
@@ -46,15 +46,15 @@ n_injury = [5];
 n_policeThreshold = [0.75];
 n_mafiaThreshold = [0.25];
 
-param_agents = [10:5:60];
-param_worldHeight = [8:1:18];
-param_worldWidth = [8:1:18];
+param_agents = [55:5:60];
+param_worldHeight = [8:1:9];
+param_worldWidth = [8:1:9];
 
 param_jailtime = [0:1:10];
 param_injury = [0:1:10];
 
-param_policeThreshold = [0.5:0.05:1];
-param_mafiaThreshold = [0:0.05:0.5];
+param_policeThreshold = [1:0.05:1];
+param_mafiaThreshold = [0:0.05:0];
 
 
 model = struct('n_lifetime' , n_lifetime, ...

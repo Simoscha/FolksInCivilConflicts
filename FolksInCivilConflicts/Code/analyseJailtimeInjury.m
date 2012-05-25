@@ -13,15 +13,15 @@ function [] = analyseJailtimeInjury(init)
                 hospital = hospitalArray(init.model.n_lifetime+1,1:hospitalLengthArray(init.model.n_lifetime+1));
                 [agents,amount] = findAllAgents(world);
 
-                averageSatisfaction = sum([agents.satisfaction]);
-    %             averageSatisfaction = 0;
-    %             for index = 1:amount-1
-    %                 averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
-    %             end
+                %averageSatisfaction = sum([agents.satisfaction]);
+                averageSatisfaction = 0;
+                for index = 1:amount-1
+                    averageSatisfaction = averageSatisfaction + agents(index).satisfaction;
+                end
                 averageSatisfaction = averageSatisfaction/amount;
-                averageSatisfactionArray(indexJailtime,indexInjury) = averageSatisfactionArray(indexJailtime,indexInjury) + averageSatisfaction;
+                averageSatisfactionArray(indexInjury,indexJailtime) = averageSatisfactionArray(indexInjury,indexJailtime) + averageSatisfaction;
             end
-            averageSatisfactionArray(indexJailtime,indexInjury) = averageSatisfactionArray(indexJailtime,indexInjury)/rCount;
+            averageSatisfactionArray(indexInjury,indexJailtime) = averageSatisfactionArray(indexInjury,indexJailtime)/rCount;
              
        end
     end
