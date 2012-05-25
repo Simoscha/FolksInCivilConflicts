@@ -16,14 +16,16 @@ DUMP = 1;               % Save the results in an external file
 
 COMPUTATION = 0;        % In case you have different engine (e.g. cluster, 
                         % multicore processor, or single core processor)
+NAME = 'Florian';
                         
-RUNS = 3;              % Number of simulation runs with same param set
+RUNS = 1;              % Number of simulation runs with same param set
 
 globals = struct('dumpDir', dumpDir, ...
                   'RUNS', RUNS, ...
                   'VIDEO', VIDEO, ...
                   'DEBUG', DEBUG, ...
-                  'DUMP', DUMP ...
+                  'DUMP', DUMP, ...
+                  'NAME', NAME ...
                   );
 
 %%%%%%%%%%%%%
@@ -41,15 +43,17 @@ n_agents = [30];       % number of agents
 n_vision = [1];
 n_jailtime = [5];
 n_injury = [5];
-n_policeThreshold = [0.5];
+n_policeThreshold = [0.75];
 n_mafiaThreshold = [0.25];
 
-param_agents = [10:5:50];
-param_worldHeight = [8:1:18];
-param_worldWidth = [8:1:18];
+%Beware: there have to be the same number of steps in population number as
+%in the size
+param_agents = [40:10:40];
+param_worldHeight = [10:1:10];
+param_worldWidth = [10:1:10];
 
-param_jailtime = [0:1:10];
-param_injury = [0:1:10];
+param_jailtime = [10:1:10];
+param_injury = [10:1:10];
 
 param_policeThreshold = [0.5:0.05:1];
 param_mafiaThreshold = [0:0.05:0.5];

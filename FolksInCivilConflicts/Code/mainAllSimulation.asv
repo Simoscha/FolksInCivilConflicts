@@ -1,4 +1,3 @@
-
 tic
 % Do the simulation Population against Worldsize
 % Clear workspace
@@ -102,7 +101,7 @@ for indexPopulation = 1:length(init.model.param_agents)
         
     end
 end
-
+%%
 % Do the simulation Jailtime against Injury
 
 % Clear workspace

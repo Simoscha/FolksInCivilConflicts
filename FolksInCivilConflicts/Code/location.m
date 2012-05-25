@@ -49,7 +49,7 @@ classdef location < handle
         end
         
         %Updates Injury and Jailtime: the more policemen and the less mafia
-        %members there are the less the jailtime will become
+        %members there are the less the jailtime will become (is not used)
         function newPenalties(obj,world)
            [nPolice,nMafia] = totalActives(world);
            
@@ -81,7 +81,7 @@ classdef location < handle
             else
             obj.pArrest=(1-obj.person.support)*(1-exp(-obj.infPolice/obj.infMafia));
             end
-            if(obj.infPolice==0)
+            if(obj.infPolice==0)    %would be dividing by 0
                obj.pInjury=(obj.person.support);
             else
             obj.pInjury=(obj.person.support)*(1-exp(-obj.infMafia/obj.infPolice));
